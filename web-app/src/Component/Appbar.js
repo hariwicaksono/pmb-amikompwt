@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
 import { Container, Row, Col, Navbar, Nav, NavItem, Button} from 'react-bootstrap'
-import { HouseDoor, Grid, BoxArrowInRight, PersonPlus } from 'react-bootstrap-icons'
+import { HouseDoorFill, GridFill, PersonFill, PersonPlusFill } from 'react-bootstrap-icons'
 
 class Appbar extends Component{
 
@@ -22,16 +22,16 @@ class Appbar extends Component{
               <Nav className="mx-auto text-center">
 
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/" activeClassName="active" exact><HouseDoor size="20"/><br/>Home</NavLink>
+                <NavLink className="nav-link" to="/" activeClassName="active" exact><HouseDoorFill size="20"/><br/>Home</NavLink>
               </NavItem>
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/about" activeClassName="active"><Grid size="24"/><br/>Panduan</NavLink>
+                <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="24"/><br/>Panduan</NavLink>
               </NavItem>
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/register" activeClassName="active"><PersonPlus size="20"/><br/>Daftar</NavLink>
+                <NavLink className="nav-link" to="/register" activeClassName="active"><PersonPlusFill size="20"/><br/>Daftar</NavLink>
               </NavItem>
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/login" activeClassName="active"><BoxArrowInRight size="20"/><br/>Login</NavLink>
+                <NavLink className="nav-link" to="/login" activeClassName="active"><PersonFill size="20"/><br/>Akun</NavLink>
               </NavItem>
 
                 </Nav>
