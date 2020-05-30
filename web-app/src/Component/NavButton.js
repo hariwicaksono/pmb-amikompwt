@@ -7,7 +7,7 @@ class NavButton extends Component{
     render(){
        
         return(  
-            <div className="sticky-bottom bg-white sticky-top">
+            <div className="sticky-bottom sticky-top" style={{backgroundColor: "#482373",paddingRight:"15px"}}>
                 <CardDeck className="mb-2">
                    
                         <Card text="light" as={Link} to='/about' className="text-center mr-0 link-unstyled" style={{backgroundColor:'#753478'}}>

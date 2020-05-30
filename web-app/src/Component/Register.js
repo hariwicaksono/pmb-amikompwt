@@ -6,7 +6,7 @@ import Appbar from './Appbar'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, FormLabel, FormGroup, FormControl, Row, Col, Button} from 'react-bootstrap'
+import {Container, FormLabel, FormGroup, Row, Col} from 'react-bootstrap'
 import Form from 'react-formal'
 import * as yup from 'yup'
 
@@ -19,6 +19,11 @@ const schema = yup.object({
     username: yup.string().required(),
     password: yup.string().required(),
   });
+const schemaLog = yup.object({
+    username: yup.string().required(),
+    password: yup.string().required(),
+    level: yup.string().required(),
+  }); 
 class Register extends Component {
     constructor(props){
         super(props)
@@ -64,18 +69,18 @@ class Register extends Component {
     <title>{ TITLE }</title>
     </Helmet>
     <Navbar />
-    <Container className="my-4" fluid>
+    <div className="bg-white mx-3">
+    <Container className="my-3 px-3 py-4" fluid>
         <Row>
         <Col md={8}>
             <div className="card">
                 <div className="card card-default">
                     <div className="card-body">
-                        <h3>Daftar Akun <small>PMB Universitas AMIKOM Purwokerto</small></h3>
-                        <hr/>
+                        <h4 className="mb-3">Daftar Akun <small>PMB Universitas AMIKOM Purwokerto</small></h4>
                      
                         <Form onSubmit={this.handlerSubmit} schema={schema} >
 
-                            <FormGroup controlId="field--nama">
+                            <FormGroup>
                            
                             <FormLabel>Nama Lengkap*</FormLabel>
                                 
@@ -87,7 +92,7 @@ class Register extends Component {
                             </FormGroup>
 
                             <Row>
-                            <FormGroup as={Col} controlId="field--email">
+                            <FormGroup as={Col}>
                                 <FormLabel>Email*</FormLabel>
                                 <Form.Field type="text" placeholder="Email" name="email" className="form-control" onChange={this.handlerChange}/>
                                 <Form.Message for="email" className="error" />
@@ -112,7 +117,7 @@ class Register extends Component {
                                 <Form.Message for="password" className="error" />
                             </FormGroup>
 
-                            <Form.Submit type="submit" className="btn btn-primary">Submit</Form.Submit>
+                            <Form.Submit type="submit" className="btn btn-primary">Daftar</Form.Submit>
                         </Form>
                      
                        
@@ -122,13 +127,42 @@ class Register extends Component {
         </Col>
         
         <Col md={4}>
-
+        
+        <div className="card">
+                <div className="card card-default">
+                    <div className="card-body">
+                    <h4 className="mb-3">Login</h4>
+        <Form onSubmit={this.handlerSubmit} schema={schemaLog}>
+            <FormGroup>
+                <FormLabel>Username</FormLabel>
+                <Form.Field type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
+                <Form.Message for="username" className="error" />
+            </FormGroup>
+            <FormGroup>
+                <FormLabel>Password</FormLabel>
+                <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
+                <Form.Message for="password" className="error" />
+            </FormGroup>
+            <FormGroup>
+            <Form.Field as="select" name="level" className="form-control" onChange={this.handlerChange} >
+                    <option value={null}>Pilih</option>
+                    <option>USER</option>
+                    <option>ADMIN</option>
+            </Form.Field>
+            <Form.Message for="level" className="error" />
+            </FormGroup>
+            <Form.Submit type="submit" className="btn btn-primary">Masuk</Form.Submit>
+        </Form>
+        </div>
+        </div>
+        </div> 
 
         </Col>
         
 
         </Row>
     </Container>
+    </div>
     <Footer />
     <Appbar />
     </div>

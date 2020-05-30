@@ -90,10 +90,10 @@ class Home extends Component {
                 <Container fluid>
 
                 <Row>
-                    <Col sm={5} md={4} lg={3}>
+                    <Col sm={5} md={4} lg={3} className="py-3" style={{backgroundColor: "#482373"}}>
                         
                     <NavButton />
-                  
+                   
                     </Col>
 
                     <Col sm={7} md={8} lg={9}>

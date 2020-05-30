@@ -6,10 +6,17 @@ import {Redirect,Link} from 'react-router-dom'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import Parser from 'html-react-parser'
-import { NotificationManager } from 'react-notifications';
+import { NotificationManager } from 'react-notifications'
+import {Container, FormLabel, FormGroup, Row, Col} from 'react-bootstrap'
+import Form from 'react-formal'
+import * as yup from 'yup'
 
 const TITLE = ' Masuk - PMB Universitas Amikom Purwokerto'
-
+const schema = yup.object({
+    username: yup.string().required(),
+    password: yup.string().required(),
+    level: yup.string().required(),
+  }); 
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -32,8 +39,8 @@ class Login extends Component {
         })
     }
 
-    handlerSubmit = (event) => {
-        event.preventDefault()
+    handlerSubmit = () => {
+        //event.preventDefault()
         API.PostLogin(this.state).then(res=>{
             if (res.id === "1" ) {
                 sessionStorage.setItem('isLogin',JSON.stringify(res.data))
@@ -74,7 +81,7 @@ class Login extends Component {
                 <title>{ TITLE }</title>
                 </Helmet>
                 <Navbar />
-                <div className="container my-5">
+                <Container className="my-5">
                     
                     <div className="col-md-4 offset-md-4">
 
@@ -82,31 +89,34 @@ class Login extends Component {
                         <div className="card card-default">
                             <div className="card-body">
                             <h4 className="mb-3">Masuk</h4>
-                                <form onSubmit={this.handlerSubmit}>
-                                    <div className="form-group">
-                                        <label>Username</label>
-                                        <input type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Password</label>
-                                        <input type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
-                                    </div>
-                                    <div className="form-group">
-                                    <select name="level" className="form-control" onChange={this.handlerChange} >
-                                            <option>Pilih</option>
+                                <Form onSubmit={this.handlerSubmit} schema={schema}>
+                                    <FormGroup>
+                                        <FormLabel>Username</FormLabel>
+                                        <Form.Field type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
+                                        <Form.Message for="username" className="error" />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <FormLabel>Password</FormLabel>
+                                        <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
+                                        <Form.Message for="password" className="error" />
+                                    </FormGroup>
+                                    <FormGroup>
+                                    <Form.Field as="select" name="level" className="form-control" onChange={this.handlerChange} >
+                                            <option value={null}>Pilih</option>
                                             <option>USER</option>
                                             <option>ADMIN</option>
-                                        </select>
-                                    </div>
-                                    <input type="submit" value="Masuk" className="btn btn-primary btn-block" onSubmit={this.handlerSubmit} />
-                                </form>                              
+                                    </Form.Field>
+                                    <Form.Message for="level" className="error" />
+                                    </FormGroup>
+                                    <Form.Submit type="submit" className="btn btn-primary">Login</Form.Submit>
+                                </Form>                              
                                 <hr/>
                                 Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link>
                             </div>
                         </div>
                         </div>
                     </div>
-                </div>
+                </Container>
                 <Footer />
                 <Appbar />
             </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'babel-polyfill';
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 import 'react-notifications/lib/notifications.css';
 import 'spin.js/spin.css';
 import App from './App';
