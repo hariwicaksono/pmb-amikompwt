@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Appbar from './Appbar'
 import API from '../ServiceApi/Index'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import ContentLoader from './Layout/PageContentLoader'
+//import ContentLoader from './Layout/PageContentLoader'
 import Parser from 'html-react-parser'
 import { Container } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
@@ -66,15 +66,15 @@ class Page extends Component {
                 <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
                 </Helmet>
                 <Navbar />
-                 <Container>
+                 <Container className="bg-white" fluid>
                     {
                         this.state.loading
                         ?
                         <Loader options={options} className="spinner" />
                         :
                        
-                        <div className="panel panel-info">
-                            <div className="panel-body">
+                        <div className="px-3 py-3">
+                            
                                 <h1>{Parser(this.state.judul_tupoksi)}</h1>
                                 <hr/>
                                 {Parser(this.state.isi_tupoksi)}
@@ -83,7 +83,7 @@ class Page extends Component {
                                 <div className="alert alert-danger">
                                     <p>YOU MUST BE LOGIN</p>
                                 </div>
-                            </div>
+                            
                         </div>
                         
 

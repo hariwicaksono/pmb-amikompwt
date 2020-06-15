@@ -44,3 +44,5 @@ input.error {
   font-weight: 300;
   color: red;
 }
+a.nav-link{font-size: 1.125rem;}
+a.dropdown-item{font-size: 1.125rem;}

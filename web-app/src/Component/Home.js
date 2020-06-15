@@ -136,9 +136,9 @@ class Home extends Component {
                         </Carousel.Item>
                     </Carousel>
                     
+                    <Container className="bg-white py-3">
                     <Row>
                     <Col md={9} lg={10} className="border-right">
-                
                     <Form onSubmit={this.handlerSubmit}>
                     <Card className="py-0">
                     <Card.Body>
@@ -175,16 +175,14 @@ class Home extends Component {
                     </Col>
 
                     <Col md={3} lg={2}>
-                    
                     <Card as={Link} to='/register' bg="light" text="dark" className="text-center">
                     <Card.Body>
                         <Card.Text style={{color:"#482373"}}><PersonPlusFill size={30} /><br/>Daftar Akun Baru</Card.Text>
                     </Card.Body>
-                    </Card>
-                        
+                    </Card> 
                     </Col>
-
                     </Row>
+                    </Container>
 
                     </Col>
                     
