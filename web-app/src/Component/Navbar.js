@@ -34,13 +34,13 @@ class NavBar extends Component{
                 <NavDropdown.Item href='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
                 <NavDropdown.Item href='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
                 <NavDropdown.Item href='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item href='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
-                <NavDropdown.Item href='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
-                <NavDropdown.Item href='/page/30'>Beasiswa</NavDropdown.Item>
                 <NavDropdown.Item href='/page/31'>Alur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item href='/page/31'>Calon Mahasiswa</NavDropdown.Item>
+                <NavDropdown.Item href='/page/30/'>Beasiswa</NavDropdown.Item>
+                
               </NavDropdown>
               <NavDropdown title="Direktori PSU &amp; Kuliah Umum" id="basic-nav-dropdown">
+              <NavDropdown.Item href='/page/19'>Kegiatan Pra Kuliah</NavDropdown.Item>
+                <NavDropdown.Item href='/page/21'>Tata Tertib Mahasiswa Baru</NavDropdown.Item>
                 <NavDropdown.Item href='/page/32'>Jadwal Kegiatan</NavDropdown.Item>
                 <NavDropdown.Item href='/page/34'>Perlengkapan</NavDropdown.Item>
                 

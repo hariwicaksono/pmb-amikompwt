@@ -3,7 +3,7 @@ import {Link,Redirect} from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Appbar from './Appbar'
-import NavButton from './NavButton'
+import SideButton from './SideButton'
 import API from '../ServiceApi/Index'
 import {Container, Form, Row, Col, Carousel, Button, Tabs, Tab, Alert, Card} from 'react-bootstrap'
 import {BoxArrowInRight,PersonPlusFill} from 'react-bootstrap-icons'
@@ -53,7 +53,7 @@ class Home extends Component {
             }
         })
     }
-
+ 
     //handlerChange = (pageNumber) =>{
          //console.log(pageNumber)
          //this.setState({activePage:pageNumber})
@@ -92,7 +92,7 @@ class Home extends Component {
                 <Row>
                     <Col sm={5} md={4} lg={3} className="py-3" style={{backgroundColor: "#482373"}}>
                         
-                    <NavButton />
+                    <SideButton />
                    
                     </Col>
 

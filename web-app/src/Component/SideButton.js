@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {CardDeck, Card} from 'react-bootstrap'
 import { CursorFill, Building, FileEarmarkText, Grid, Folder, DisplayFill } from 'react-bootstrap-icons'
  
-class NavButton extends Component{
+class SideButton extends Component{
     render(){
        
         return(  
@@ -21,7 +21,7 @@ class NavButton extends Component{
                     </Card>
                   
                   
-                    <Card text="light" as={Link} to='/about' className="text-center mr-0 link-unstyled" style={{backgroundColor:'#753478'}}>
+                    <Card text="light" as={Link} to='/page/18' className="text-center mr-0 link-unstyled" style={{backgroundColor:'#753478'}}>
                         <Card.Body>
                         <Card.Title><CursorFill size={40}/></Card.Title>
                         <Card.Text>
@@ -60,7 +60,7 @@ class NavButton extends Component{
                     
                     <CardDeck className="mb-2">
                    
-                        <Card text="light" as={Link} to='/about' className="text-center mr-0 link-unstyled" style={{backgroundColor:'#753478'}}>
+                        <Card text="light" as={Link} to='/page/30/' className="text-center mr-0 link-unstyled" style={{backgroundColor:'#753478'}}>
                         <Card.Body>
                         <Card.Title><Folder size={40}/></Card.Title>
                         <Card.Text>
@@ -86,5 +86,5 @@ class NavButton extends Component{
         )
     }
 }
-
-export default NavButton
+ 
+export default SideButton
