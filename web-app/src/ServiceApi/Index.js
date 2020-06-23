@@ -90,6 +90,17 @@ const POSTSOAL = (path,data) =>{
     return promise
 }
 
+const GET_ID_VAL = (path,data) => {
+    const promise = new Promise((resolve,reject) => {
+        Axios.get(RoothPath+path+data).then(res => {
+            resolve(res.data.data)
+        }).catch(er => {
+            reject(er)
+        })
+    })
+    return promise
+}
+
 
 const GetPageId = (data) => GET_ID('PageController?id=',data)
 const GetSoal = () => GET('SoalController')
@@ -102,6 +113,7 @@ const PostUser = (data) => POSTUSER('UserController',data)
 const GetUserId = (data) => GET_ID('UserController?id=',data)
 const DeleteUser = (id) => Delete('UserController/index_delete?id=',id)
 const PutUser = (data) => PUTPRODUK('UserController',data)
+const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
 
 
 const API = {
@@ -115,7 +127,8 @@ const API = {
     PostUser,
     GetUserId,
     DeleteUser,
-    PutUser
+    PutUser,
+    CariOrang
     
 }
 

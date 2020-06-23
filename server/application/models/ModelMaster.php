@@ -178,6 +178,15 @@ class ModelMaster extends CI_Model {
 		}
 	}
 
+	public function cari_orang($id='')
+	{
+		if ($id === '') {
+			return $this->db->get('calonsiswa')->result_array();
+		} else {
+			return $this->db->get_where('calonsiswa',['nodaf'=>$id])->result_array();
+		}
+	}
+
 
 
 
