@@ -19,7 +19,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/user" component={User} />
         <Route path="/akunU" component={AkunU} />
-        <Route path="/page/:id" component={Page} />
+        <Route path="/page/:id" exact component={Page} />
         <Route path="/pageU/:id" component={PageU} />
         <NotificationContainer />
 

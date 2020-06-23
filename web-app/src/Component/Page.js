@@ -58,6 +58,10 @@ class Page extends Component {
             }), 200);
         })
     }
+    componentDidUpdate(prevProps) {
+        if (prevProps.location.pathname !== this.props.location.pathname) { window.location.reload();
+        }
+    }
     render() {
         
         return (
@@ -67,6 +71,8 @@ class Page extends Component {
                 <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
                 </Helmet>
                 <Navbar />
+
+                <Container fluid>
 
                 <Row>
                     <Col sm={5} md={4} lg={3} className="py-3" style={{backgroundColor: "#482373"}}>
@@ -104,6 +110,7 @@ class Page extends Component {
 
                     </Col>
                 </Row>
+                </Container>
                  
                 <Appbar />
             </div>

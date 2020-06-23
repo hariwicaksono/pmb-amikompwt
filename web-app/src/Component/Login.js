@@ -7,7 +7,7 @@ import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import Parser from 'html-react-parser'
 import { NotificationManager } from 'react-notifications'
-import {Container, FormLabel, FormGroup, Row, Col} from 'react-bootstrap'
+import {Container, FormLabel, FormGroup, Card, Row, Col} from 'react-bootstrap'
 import Form from 'react-formal'
 import * as yup from 'yup'
 
@@ -81,14 +81,15 @@ class Login extends Component {
                 <title>{ TITLE }</title>
                 </Helmet>
                 <Navbar />
-                <Container className="my-5">
+               
+                <Container>
                     
-                    <div className="col-md-4 offset-md-4">
-
-                        <div className="card" style={{backgroundColor:''}}>
-                        <div className="card card-default">
-                            <div className="card-body">
-                            <h4 className="mb-3">Masuk</h4>
+                <Row className="justify-content-center my-4">
+                <Col lg="5">
+                    <Card className="bg-white shadow border-0">
+                      
+                            <Card.Body>
+                            <h4 className="mb-3"><strong>Masuk</strong></h4>
                                 <Form onSubmit={this.handlerSubmit} schema={schema}>
                                     <FormGroup>
                                         <FormLabel>Username</FormLabel>
@@ -110,13 +111,15 @@ class Login extends Component {
                                     </FormGroup>
                                     <Form.Submit type="submit" className="btn btn-primary">Login</Form.Submit>
                                 </Form>                              
-                                <hr/>
-                                Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+  
+                               
+                            </Card.Body>
+                            <Card.Footer className="text-muted"> Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link></Card.Footer>
+                        </Card>
+                        </Col>
+                    </Row>
                 </Container>
+
                 <Footer />
                 <Appbar />
             </div>

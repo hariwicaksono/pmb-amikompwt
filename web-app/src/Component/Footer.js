@@ -6,17 +6,26 @@ class Footer extends Component{
     render(){
      
         return(  
-            
-            <div style={{backgroundColor:'#110D56',marginTop:'14px'}} className="pt-5 pb-5">
+            <section className="section section-lg bg-gradient-default">
+                
+            <div>
             <Container>
+            <Row className="text-center justify-content-center mb-5">
+                <Col lg="10">
+                  <h1 className="text-white"><strong>UNIVERSITAS AMIKOM PURWOKERTO</strong></h1>
+                  <h4 className="text-white">
+                    "SUCCESS, SPIRIT &amp; CREATIVE"
+                  </h4>
+                </Col>
+              </Row>
             <Row>
                 <Col sm={6} md={6}>
-                <div className="text-light">
-                <h4>Contact<br/>
-                <small className="text-light">Jl. Let. Jend. Pol. Soemarto (depan SPN) Purwokerto<br/>
+                <div>
+                <h3 className="text-white">Contact<br/>
+                <small className="text-white">Jl. Let. Jend. Pol. Soemarto (depan SPN) Purwokerto<br/>
                 Telp: (0281) 623321 / (fax) (0281) 623196<br/>
                 Email: amikom@amikompurwokerto.ac.id<br/>
-                Whatsapp: 085848888445</small></h4>
+                Whatsapp: 085848888445</small></h3>
                 </div>
                 </Col>
 
@@ -25,11 +34,12 @@ class Footer extends Component{
                 </Col>
             </Row>
 
-            <div className="text-light mt-3">© 2020. Universitas Amikom Purwokerto</div>
+            <div className="text-white mt-3">© 2020. Universitas Amikom Purwokerto</div>
 
             </Container>
               
         </div>
+        </section>
         )
     }
 }

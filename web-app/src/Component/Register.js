@@ -6,7 +6,7 @@ import Appbar from './Appbar'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, FormLabel, FormGroup, Row, Col} from 'react-bootstrap'
+import {Container, FormLabel, FormGroup, Row, Col, Card} from 'react-bootstrap'
 import Form from 'react-formal'
 import * as yup from 'yup'
 
@@ -69,14 +69,14 @@ class Register extends Component {
     <title>{ TITLE }</title>
     </Helmet>
     <Navbar />
-    <div className="bg-white mx-3">
-    <Container className="my-3 px-3 py-4" fluid>
+    
+    <Container className="py-4" fluid>
         <Row>
         <Col md={8}>
-            <div className="card">
-                <div className="card card-default">
-                    <div className="card-body">
-                        <h4 className="mb-3">Daftar Akun <small>PMB Universitas AMIKOM Purwokerto</small></h4>
+        <Card className="bg-white shadow border-0">
+               
+                    <Card.Body>
+                        <h4 className="mb-3"><strong>Daftar Akun</strong> <small>PMB Universitas AMIKOM Purwokerto</small></h4>
                      
                         <Form onSubmit={this.handlerSubmit} schema={schema} >
 
@@ -121,17 +121,17 @@ class Register extends Component {
                         </Form>
                      
                        
-                    </div>
-                </div>
-            </div>
+                    </Card.Body>
+               
+            </Card>
         </Col>
         
         <Col md={4}>
         
-        <div className="card">
-                <div className="card card-default">
-                    <div className="card-body">
-                    <h4 className="mb-3">Login</h4>
+        <Card className="bg-secondary shadow border-0">
+                
+                    <Card.Body>
+                    <h4 className="mb-3"><strong>Login</strong></h4>
         <Form onSubmit={this.handlerSubmit} schema={schemaLog}>
             <FormGroup>
                 <FormLabel>Username</FormLabel>
@@ -153,16 +153,16 @@ class Register extends Component {
             </FormGroup>
             <Form.Submit type="submit" className="btn btn-primary">Masuk</Form.Submit>
         </Form>
-        </div>
-        </div>
-        </div> 
+        </Card.Body>
+      
+        </Card> 
 
         </Col>
         
 
         </Row>
     </Container>
-    </div>
+
     <Footer />
     <Appbar />
     </div>
