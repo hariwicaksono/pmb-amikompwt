@@ -56,8 +56,7 @@ class BaseControllerApi extends ResourceController
         $this->session = \Config\Services::session();
 	}
 
-    public function getResponse(array $responseBody,
-                                int $code = ResponseInterface::HTTP_OK)
+    public function getResponse(array $responseBody, int $code = ResponseInterface::HTTP_OK)
     {
         return $this
             ->response
