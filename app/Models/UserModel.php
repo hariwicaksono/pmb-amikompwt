@@ -10,15 +10,15 @@ class UserModel extends Model
     protected $DBGroup              = 'default';
     protected $table                = 'registrasi_pmb';
     protected $primaryKey           = 'username';
-    protected $useAutoIncrement     = true;
+    protected $useAutoIncrement     = false;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['email','username','password'];
+    protected $allowedFields        = ['username','email','password','aktivasi','nama','telp','bukti_pembayaran','foto','tahun_daftar'];
 
     // Dates
-    protected $useTimestamps        = false;
+    protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
     protected $createdField         = 'tanggal_daftar';
     //protected $updatedField         = 'updated_at';

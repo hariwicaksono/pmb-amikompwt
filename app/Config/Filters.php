@@ -20,7 +20,7 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
-        'auth'     => JWTAuthenticationFilter::class,
+        'jwtauth'  => JWTAuthenticationFilter::class,
     ];
 
     /**

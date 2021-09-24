@@ -1,14 +1,14 @@
 <?php
 namespace App\Controllers;
 
+use Config\Services;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Psr\Log\LoggerInterface;
 use CodeIgniter\Validation\Exceptions\ValidationException;
-use Config\Services;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BaseController
@@ -43,6 +43,10 @@ class BaseControllerApi extends ResourceController
 	/**
 	 * Constructor.
 	 */
+    protected $data;
+    protected $session;
+    protected $validator;
+    
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
@@ -51,9 +55,10 @@ class BaseControllerApi extends ResourceController
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
+        $config = config("App");
         $this->session = \Config\Services::session();
+        $language = \Config\Services::language();
+		$language->setLocale($this->session->lang ?? $config->defaultLocale);
 	}
 
     public function getResponse(array $responseBody, int $code = ResponseInterface::HTTP_OK)
@@ -64,17 +69,9 @@ class BaseControllerApi extends ResourceController
             ->setJSON($responseBody);
     }
 
-    public function getRequestInput(IncomingRequest $request){
-        $input = $request->getPost();
-        if (empty($input)) {
-            //convert request body to associative array
-            $input = json_decode($request->getBody(), true);
-        }
-        return $input;
-    }
-
-    public function validateRequest($input, array $rules, array $messages = []){
-        $this->validator = Services::Validation()->setRules($rules);
+    protected function validate($rules, array $messages = []): bool
+    {
+        $this->validator = Services::validation();
         // If you replace the $rules array with the name of the group
         if (is_string($rules)) {
             $validation = config('Validation');
@@ -88,13 +85,47 @@ class BaseControllerApi extends ResourceController
             // If no error message is defined, use the error message in the Config\Validation file
             if (!$messages) {
                 $errorName = $rules . '_errors';
-                $messages = $validation->$errorName ?? [];
+                $messages  = $validation->$errorName ?? [];
             }
 
             $rules = $validation->$rules;
         }
-        return $this->validator->setRules($rules, $messages)->run($input);
+        $data = $this->getRequestInput();
+        return $this->validator->setRules($rules, $messages)->run((array)$data);
     }
 
+    public function getRequestInput($filtering = true){
+        $request = $this->request;
+        /** @var IncomingRequest $request */
+        if (strpos($request->getHeaderLine('Content-Type'), 'application/json') !== false) {
+            $data = $request->getJSON(true);
+        }
+
+        if (
+            in_array($request->getMethod(), ['put', 'patch', 'delete'], true)
+            && strpos($request->getHeaderLine('Content-Type'), 'multipart/form-data') === false
+        ) {
+            $data = $request->getRawInput();
+        } else {
+            $data = $request->getVar() ?? [];
+        }
+        $data = (array) array_merge((array)$data, $request->getFiles() ?? []);
+        if($filtering){
+            return $this->filteringData($data);
+        }else{
+            return $data;
+        }
+    }
+
+    protected function filteringData($data)
+    {
+        foreach ($data as &$value) {
+            if (is_string($value)) {
+                $value = htmlspecialchars($value, true);
+            }
+        }
+        unset($value);
+        return $data;
+    }
 
 }

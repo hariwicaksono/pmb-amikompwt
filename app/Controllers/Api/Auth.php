@@ -24,9 +24,9 @@ class Auth extends BaseControllerApi
             'password' => 'required|min_length[8]|max_length[255]'
         ];
 
-        $input = $this->getRequestInput($this->request);
+        $input = $this->getRequestInput();
 
-        if (!$this->validateRequest($input, $rules)) {
+        if (!$this->validate($rules)) {
             return $this->getResponse(
                     $this->validator->getErrors(),
                     ResponseInterface::HTTP_OK
@@ -36,7 +36,15 @@ class Auth extends BaseControllerApi
         $userModel = new UserModel();
         $userModel->save($input);
 
-        return $this->getJWTForUser($input['email'],ResponseInterface::HTTP_OK);
+        //return $this->getJWTForUser($input['email'],ResponseInterface::HTTP_OK);
+        return $this->getResponse(
+            [
+                'status' => true,
+                'message' => 'Berhasil',
+                'data' => []
+            ],
+            ResponseInterface::HTTP_OK
+        );
     }
 
     /**
@@ -56,9 +64,9 @@ class Auth extends BaseControllerApi
             ]
         ];
 
-        $input = $this->getRequestInput($this->request);
+        $input = $this->getRequestInput();
 
-        if (!$this->validateRequest($input, $rules, $errors)) {
+        if (!$this->validate($rules, $errors)) {
             return $this->getResponse(
                     [
                         'status' => false,
