@@ -11,6 +11,9 @@ use ReflectionException;
 
 class Auth extends BaseControllerApi
 {
+    protected $format       = 'json';
+    protected $modelName    = UserModel::class;
+
     /**
      * Register a new user
      * @return Response
@@ -33,8 +36,7 @@ class Auth extends BaseControllerApi
                 );
         }
 
-        $userModel = new UserModel();
-        $userModel->save($input);
+        $this->model->save($input);
 
         //return $this->getJWTForUser($input['email'],ResponseInterface::HTTP_OK);
         return $this->getResponse(
@@ -84,8 +86,7 @@ class Auth extends BaseControllerApi
         int $responseCode = ResponseInterface::HTTP_OK
     ) {
         try {
-            $model = new UserModel();
-            $user = $model->findUserByEmailAddress($emailAddress);
+            $user = $this->model->findUserByEmailAddress($emailAddress);
             unset($user['password']);
 
             helper('jwt');
