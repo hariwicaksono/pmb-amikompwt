@@ -38,7 +38,6 @@ class Auth extends BaseControllerApi
 
         $this->model->save($input);
 
-        //return $this->getJWTForUser($input['email'],ResponseInterface::HTTP_OK);
         return $this->getResponse(
             [
                 'status' => true,
