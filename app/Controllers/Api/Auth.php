@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Controllers\Api;
+<?php namespace App\Controllers\Api;
 
 use App\Controllers\BaseControllerApi;
 use App\Models\UserModel;

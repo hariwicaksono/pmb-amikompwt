@@ -1,2 +1,4 @@
 <?php
-return [];
+return [
+    "forgotPass" => "Forgot Password",
+];

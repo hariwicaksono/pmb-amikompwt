@@ -33,6 +33,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
+	$routes->get('slideshow', 'Slideshow::index');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
