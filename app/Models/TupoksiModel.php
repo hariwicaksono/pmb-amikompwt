@@ -7,21 +7,21 @@ use CodeIgniter\Model;
 class TupoksiModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'tupoksis';
-    protected $primaryKey           = 'id';
+    protected $table                = 'tupoksi';
+    protected $primaryKey           = 'id_tupoksi';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
-    protected $protectFields        = true;
+    protected $protectFields        = false;
     protected $allowedFields        = [];
 
     // Dates
     protected $useTimestamps        = false;
     protected $dateFormat           = 'datetime';
-    protected $createdField         = 'created_at';
-    protected $updatedField         = 'updated_at';
-    protected $deletedField         = 'deleted_at';
+    protected $createdField         = '';
+    protected $updatedField         = '';
+    protected $deletedField         = '';
 
     // Validation
     protected $validationRules      = [];

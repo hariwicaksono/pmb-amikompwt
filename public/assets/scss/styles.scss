@@ -1,0 +1,66 @@
+/* COLOR VARIABLES
+============================================= */
+$amikom: #482373;
+$purple1: #361261;
+$purple2: #653E92;
+$purple3: #822985;
+$yellow: #FEBF1C;
+$orange: #F4912A;
+$orange2: #F26932;
+
+/* GRADIENT LISTS
+============================================= */
+
+$list1: $amikom 0%, $purple3 100%; 
+$list2: $purple1 0%, $purple3 100%; 
+
+@mixin gradient($direction, $list) { 
+  background: -webkit-linear-gradient(to $direction, $list);
+  background: -moz-linear-gradient(to $direction, $list);
+  background: -o-linear-gradient(to $direction, $list);
+  background: linear-gradient(to $direction, $list);  
+}
+
+.gds-purple-1 {
+  background: $amikom;
+  @include gradient(left, $list1);
+}
+
+.gde-purple-1 {
+  background: $amikom;
+  @include gradient(right, $list1);
+}
+
+.gdt-purple-1 {
+  background: $amikom;
+  @include gradient(top, $list1);
+}
+
+.gdb-purple-1 {
+  background: $amikom;
+  @include gradient(bottom, $list1);
+}
+
+.gds-purple-2 {
+  background: $amikom;
+  @include gradient(left, $list2);
+}
+
+.gde-purple-2 {
+  background: $amikom;
+  @include gradient(right, $list2);
+}
+
+.gdt-purple-2 {
+  background: $amikom;
+  @include gradient(top, $list2);
+}
+
+.gdb-purple-2 {
+  background: $amikom;
+  @include gradient(bottom, $list2);
+}
+
+.status-bar {
+  background-color: $purple2 !important;
+}

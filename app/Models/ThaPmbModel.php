@@ -4,24 +4,24 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TahunPMBModel extends Model
+class ThaPmbModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'tahunpmbs';
-    protected $primaryKey           = 'id';
+    protected $table                = 'THA_PMB';
+    protected $primaryKey           = 'thn_akademik';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
-    protected $protectFields        = true;
+    protected $protectFields        = false;
     protected $allowedFields        = [];
 
     // Dates
     protected $useTimestamps        = false;
     protected $dateFormat           = 'datetime';
-    protected $createdField         = 'created_at';
-    protected $updatedField         = 'updated_at';
-    protected $deletedField         = 'deleted_at';
+    protected $createdField         = '';
+    protected $updatedField         = '';
+    protected $deletedField         = '';
 
     // Validation
     protected $validationRules      = [];
@@ -39,4 +39,13 @@ class TahunPMBModel extends Model
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
+
+    function getThaPmb()
+    {
+        $this->select('thn_akademik');
+        $data = $this->findAll();
+        foreach ($data as $row) {
+            return $row['thn_akademik'];
+        }
+    }
 }

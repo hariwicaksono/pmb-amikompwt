@@ -1,0 +1,23 @@
+{
+  "name": "pmb-amikompwt",
+  "version": "1.0.0",
+  "description": "## What is CodeIgniter?",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass -w public/assets/scss -o public/assets/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hariwicaksono/pmb-amikompwt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hariwicaksono/pmb-amikompwt/issues"
+  },
+  "homepage": "https://github.com/hariwicaksono/pmb-amikompwt#readme"
+}

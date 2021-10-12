@@ -1,19 +1,72 @@
 <?php $this->extend("layouts/appFront"); ?>
 <?php $this->section("content"); ?>
 
-<template>
-    <v-carousel class="purple" height="auto" cycle hide-delimiter-background>
-        <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow">
-            <v-img :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" :lazy-src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="grey lighten-2" width="100%">
-                <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                    </v-row>
-                </template>
-            </v-img>
-        </v-carousel-item>
-    </v-carousel>
-</template>
+<div class="mb-3">
+    <v-card elevation="0" v-if="show == true">
+        <v-skeleton-loader type="image, image"></v-skeleton-loader>
+    </v-card>
+    <v-card elevation="2" v-if="show == false">
+        <v-carousel height="auto" cycle hide-delimiter-background>
+            <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow">
+                <v-img :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" :lazy-src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="grey lighten-2" width="100%">
+                    <template v-slot:placeholder>
+                        <v-row class="deep-purple fill-height ma-0" align="center" justify="center">
+                            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                        </v-row>
+                    </template>
+                </v-img>
+            </v-carousel-item>
+        </v-carousel>
+    </v-card>
+</div>
+
+<div>
+    <v-row>
+        <v-col v-for="(item, i) in cardFakultas" :key="i" link :href="item.link" cols="12" sm="6">
+            <v-card>
+                <div class="d-flex flex-no-wrap justify-space-between">
+                    <div>
+                        <v-card-title class="text-h5"><strong>Fakultas</strong><br />{{item.name}}</v-card-title>
+                        <v-card-actions>
+                            <v-btn :href="item.link" class="ml-2 mt-5" outlined rounded>
+                                Selengkapnya
+                            </v-btn>
+                        </v-card-actions>
+                    </div>
+                    <v-avatar class="ma-3" size="125" tile>
+                        <v-img :src="item.img"></v-img>
+                    </v-avatar>
+                </div>
+            </v-card>
+        </v-col>
+    </v-row>
+</div>
+
+<div>
+    <v-row>
+        <v-col cols="12" sm="3">
+            <v-card>
+                <v-card-title><span data-purecounter-start="0" data-purecounter-end="<?=$jumlah_akun?>" data-purecounter-duration="1" class="purecounter"></span></v-card-title>
+                <v-card-text>Daftar Akun Online</v-card-text>
+            </v-card>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-card>
+                <?=$jumlah_calonsiswa?>
+            </v-card>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-card>
+                <?=$jumlah_akun?>
+            </v-card>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-card>
+                <?=$jumlah_akun?>
+            </v-card>
+        </v-col>
+    </v-row>
+</div>
 
 <v-dialog v-model="dialog" persistent max-width="600px" min-width="600px">
     <div>
@@ -21,7 +74,7 @@
             <v-tabs-slider color="purple darken-4"></v-tabs-slider>
             <v-tab v-for="i in tabs" :key="i">
                 <v-icon large>{{ i.icon }}</v-icon>
-                <div class="caption py-1">{{ i.name }}</div>
+                <div class="subtitle-2 py-1">{{ i.name }}</div>
             </v-tab>
             <v-tab-item>
                 <v-card class="px-4">
@@ -37,9 +90,9 @@
                                 <v-spacer></v-spacer>
                                 <v-col cols="12">
                                     <v-layout>
-                                        <a class="subtitle-1" href="<?= base_url('/password/reset') ?>"><?= lang('App.forgotPass') ?></a>
+                                        <a class="subtitle-2" href="<?= base_url('/password/reset') ?>"><?= lang('App.forgotPass') ?></a>
                                         <v-spacer></v-spacer>
-                                        <v-btn text large class="mr-2" @click="dialog = false"><?= lang('App.close') ?></v-btn>
+                                        <v-btn text large class="mr-2" @click="dialogClose"><?= lang('App.close') ?></v-btn>
                                         <v-btn large color="primary" :loading="loading" @click="submit">Login</v-btn>
                                     </v-layout>
                                 </v-col>
@@ -70,9 +123,8 @@
                                     <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Confirm Password" counter @click:append="show1 = !show1"></v-text-field>
                                 </v-col>
                                 <v-spacer></v-spacer>
-                                <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
-                                    <v-btn x-large block :disabled="!valid" color="success" @click="validate">Register</v-btn>
-                                </v-col>
+                                <v-btn class="mb-1" large block color="purple white--text" @click="validate">Register</v-btn>
+                                <v-btn text block class="mr-2" @click="dialogClose"><?= lang('App.close') ?></v-btn>
                             </v-row>
                         </v-form>
                     </v-card-text>
@@ -131,6 +183,17 @@
             min: v => (v && v.length >= 8) || "Min 8 characters"
         },
         slideshows: [],
+        cardFakultas: [{
+                name: "Ilmu Komputer",
+                img: "http://pmb.amikompurwokerto.ac.id/assets/main/images/iconpack/web-development_2210153.png",
+                link: "http://fik.amikompurwokerto.ac.id",
+            },
+            {
+                name: "Bisnis & Ilmu Sosial",
+                img: "http://pmb.amikompurwokerto.ac.id/assets/main/images/iconpack/diagram_2210211.png",
+                link: "http://fbis.amikompurwokerto.ac.id",
+            }
+        ],
     }
     methodsVue = {
         ...methodsVue,
@@ -143,7 +206,12 @@
             this.$refs.form.reset();
         },
         resetValidation() {
-            this.$refs.form.resetValidation();
+            this.$refs.loginForm.resetValidation();
+            this.$refs.registerForm.resetValidation();
+        },
+        dialogClose: function() {
+            this.dialog = false;
+            this.resetValidation();
         },
         getSlides: function() {
             this.show = true;
@@ -152,6 +220,7 @@
                     // handle success
                     var data = res.data;
                     this.slideshows = data.data;
+                    this.show = false;
                 })
                 .catch(err => {
                     // handle error
@@ -202,5 +271,5 @@
         }
     }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
 <?php $this->endSection("js") ?>

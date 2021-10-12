@@ -21,10 +21,11 @@
 <body>
     <div id="app">
         <v-app>
-            <v-app-bar app color="purple darken-3" class="gde-purple-1" dark elevate-on-scroll>
+            <v-system-bar dark class="status-bar mt-n5"></v-system-bar>
+            <v-app-bar app color="purple darken-3" class="gde-purple-1 mt-5" dark elevation="3">
                 <v-app-bar-nav-icon color="yellow darken-2" x-large @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
                 <v-btn href="<?= base_url() ?>" text="true">
-                    <v-toolbar-title style="cursor: pointer">AMIKOM</v-toolbar-title>
+                    <v-toolbar-title style="cursor: pointer"></v-toolbar-title>
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn text color="yellow darken-2" x-large class="d-none d-lg-block" @click="dialogOpen">
@@ -63,7 +64,7 @@
                 </v-btn>
             </v-app-bar>
 
-            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating  :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
+            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating absolute :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
                 <v-list dense elevation="2">
                     <v-list-item>
                         <v-list-item-action>
@@ -110,7 +111,7 @@
                 </v-list>
             </v-navigation-drawer>
 
-            <v-navigation-drawer v-model="rightMenu" app right temporary bottom>
+            <v-navigation-drawer v-model="rightMenu" app right temporary absolute bottom>
                 <template v-slot:prepend>
                     <v-list-item>
                         <v-list-item-content>
@@ -136,7 +137,7 @@
             </v-navigation-drawer>
 
             <v-main>
-                <v-container>
+                <v-container class="px-6" fluid>
                     <?= $this->renderSection('content') ?>
                 </v-container>
             </v-main>
