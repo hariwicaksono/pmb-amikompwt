@@ -35,6 +35,9 @@ $routes->get('/', 'Home::index');
 
 $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
 	$routes->get('slideshow', 'Slideshow::index');
+    $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');
+    $routes->get('tupoksi', 'Tupoksi::index');
+    $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
 });
 
 /*

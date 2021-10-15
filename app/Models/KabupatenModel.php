@@ -7,21 +7,21 @@ use CodeIgniter\Model;
 class KabupatenModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'kabupatens';
-    protected $primaryKey           = 'id';
+    protected $table                = 'kabupaten_kota';
+    protected $primaryKey           = 'id_kabupaten';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
-    protected $protectFields        = true;
+    protected $protectFields        = false;
     protected $allowedFields        = [];
 
     // Dates
-    protected $useTimestamps        = false;
+    protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
     protected $createdField         = 'created_at';
     protected $updatedField         = 'updated_at';
-    protected $deletedField         = 'deleted_at';
+    protected $deletedField         = '';
 
     // Validation
     protected $validationRules      = [];

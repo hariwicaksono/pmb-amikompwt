@@ -4,11 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GelombangModel extends Model
+class NilaiModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'data_gelombang';
-    protected $primaryKey           = 'kode';
+    protected $table                = 'tbl_nilai';
+    protected $primaryKey           = 'id_nilai';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';

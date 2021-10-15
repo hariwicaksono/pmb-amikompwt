@@ -2,19 +2,12 @@
 <?php $this->section("content"); ?>
 
 <div class="mb-3">
-    <v-card elevation="0" v-if="show == true">
+    <v-card v-if="show == true">
         <v-skeleton-loader type="image, image"></v-skeleton-loader>
     </v-card>
-    <v-card elevation="2" v-if="show == false">
+    <v-card v-if="show == false">
         <v-carousel height="auto" cycle hide-delimiter-background>
-            <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow">
-                <v-img :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" :lazy-src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="grey lighten-2" width="100%">
-                    <template v-slot:placeholder>
-                        <v-row class="deep-purple fill-height ma-0" align="center" justify="center">
-                            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                        </v-row>
-                    </template>
-                </v-img>
+            <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow" :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="deep-purple fill-height">
             </v-carousel-item>
         </v-carousel>
     </v-card>
@@ -44,25 +37,28 @@
 
 <div>
     <v-row>
-        <v-col cols="12" sm="3">
+        <v-col class="text-center" cols="12" sm="3">
             <v-card>
-                <v-card-title><span data-purecounter-start="0" data-purecounter-end="<?=$jumlah_akun?>" data-purecounter-duration="1" class="purecounter"></span></v-card-title>
+                <h1 class="text-h4 pt-3">{{ intJumlahAkun }}</h1>
                 <v-card-text>Daftar Akun Online</v-card-text>
             </v-card>
         </v-col>
-        <v-col cols="12" sm="3">
+        <v-col class="text-center" cols="12" sm="3">
             <v-card>
-                <?=$jumlah_calonsiswa?>
+                <h1 class="text-h4 pt-3">{{ intJumlahCalonsiswa }}</h1>
+                <v-card-text>Total Formulir Masuk</v-card-text>
             </v-card>
         </v-col>
-        <v-col cols="12" sm="3">
+        <v-col class="text-center" cols="12" sm="3">
             <v-card>
-                <?=$jumlah_akun?>
+                <h1 class="text-h4 pt-3">{{ intJumlahTahunlalu }}</h1>
+                <v-card-text>Pendaftar Tahun Lalu</v-card-text>
             </v-card>
         </v-col>
-        <v-col cols="12" sm="3">
+        <v-col class="text-center" cols="12" sm="3">
             <v-card>
-                <?=$jumlah_akun?>
+                <h1 class="text-h4 pt-3">{{ intJumlahBeasiswa }}</h1>
+                <v-card-text>Lulus Beasiswa</v-card-text>
             </v-card>
         </v-col>
     </v-row>
@@ -138,14 +134,31 @@
 
 <?php $this->section("js") ?> 
 <script>
+    let startCount = 0;
+
     computedVue = {
         ...computedVue,
         passwordMatch() {
             return () => this.password === this.verify || "Password must match";
+        },
+        intJumlahAkun() {
+            return Math.trunc(this.count1).toLocaleString()
+        },
+        intJumlahCalonsiswa() {
+            return Math.trunc(this.count2).toLocaleString()
+        },
+        intJumlahTahunlalu() {
+            return Math.trunc(this.count3).toLocaleString()
+        },
+        intJumlahBeasiswa() {
+            return Math.trunc(this.count4).toLocaleString()
         }
     }
     createdVue = function() {
         this.getSlides();
+    }
+    var mountedVue = function() {
+        this.counterJumlah();
     }
     dataVue = {
         ...dataVue,
@@ -194,6 +207,14 @@
                 link: "http://fbis.amikompurwokerto.ac.id",
             }
         ],
+        count1: startCount,
+        count2: startCount,
+        count3: startCount,
+        count4: startCount,
+        jumlahAkun: <?= $jumlah_akun ?>,
+        jumlahCalonsiswa: <?= $jumlah_calonsiswa ?>,
+        jumlahTahunlalu: <?= $jumlah_tahunlalu ?>,
+        jumlahBeasiswa: <?= $jumlah_beasiswa ?>,
     }
     methodsVue = {
         ...methodsVue,
@@ -268,8 +289,19 @@
         },
         clear() {
             this.$refs.form.reset()
-        }
+        },
+        counterJumlah() {
+            anime({
+                targets: this.$data,
+                count1: this.jumlahAkun,
+                count2: this.jumlahCalonsiswa,
+                count3: this.jumlahTahunlalu,
+                count4: this.jumlahBeasiswa,
+                duration: 10000,
+                delay: 200,
+                easing: 'easeInOutCubic',
+            })
+        },
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
 <?php $this->endSection("js") ?>

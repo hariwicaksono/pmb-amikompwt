@@ -4,11 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GelombangModel extends Model
+class SoalModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'data_gelombang';
-    protected $primaryKey           = 'kode';
+    protected $table                = 'soal';
+    protected $primaryKey           = 'id_soal';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
@@ -17,11 +17,11 @@ class GelombangModel extends Model
     protected $allowedFields        = [];
 
     // Dates
-    protected $useTimestamps        = false;
+    protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
-    protected $createdField         = 'created_at';
-    protected $updatedField         = 'updated_at';
-    protected $deletedField         = 'deleted_at';
+    protected $createdField         = 'tanggal';
+    protected $updatedField         = '';
+    protected $deletedField         = '';
 
     // Validation
     protected $validationRules      = [];

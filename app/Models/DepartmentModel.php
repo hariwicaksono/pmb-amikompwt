@@ -7,13 +7,13 @@ use CodeIgniter\Model;
 class DepartmentModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'departments';
-    protected $primaryKey           = 'id';
+    protected $table                = 'DEPARTMENT';
+    protected $primaryKey           = 'KD_DEPT';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
-    protected $protectFields        = true;
+    protected $protectFields        = false;
     protected $allowedFields        = [];
 
     // Dates

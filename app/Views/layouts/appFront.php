@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>App</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
@@ -11,14 +9,31 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
     <link href="<?= base_url('assets/css/styles.css')?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <style>
-        html {
-            overflow-y: auto;
-        }
-    </style>
+    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
 </head>
 
 <body>
+    <!-- ========================= preloader start ========================= -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-logo"><img src="<?= base_url('assets/images/Logo.png') ?>" alt="Preloader Logo Amikom" width="64"></div>
+            <div class="spinner">
+                <div class="spinner-container">
+                    <div class="spinner-rotator">
+                        <div class="spinner-left">
+                            <div class="spinner-circle"></div>
+                        </div>
+                        <div class="spinner-right">
+                            <div class="spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
     <div id="app">
         <v-app>
             <v-app-bar app color="purple darken-3" class="gde-purple-1" dark elevate-on-scroll>
@@ -156,12 +171,12 @@
         </v-app>
     </div>
 
-    <script src="https://vuejs.org/js/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="https://unpkg.com/vuetify-image-input"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
-
+    <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
+    <script src="https://unpkg.com/animejs@2.2.0/anime.min.js" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/main.js')?>" type="text/javascript"></script>
+    
     <script>
         var computedVue = {
             isMobile() {
@@ -283,7 +298,9 @@
         }
         Vue.component('paginate', VuejsPaginate)
     </script>
+
     <?= $this->renderSection('js') ?>
+
     <script>
         new Vue({
             el: '#app',
@@ -297,5 +314,4 @@
         })
     </script>
 </body>
-
 </html>
