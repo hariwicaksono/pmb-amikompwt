@@ -9,20 +9,42 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"> 
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
-    <link href="<?= base_url('assets/css/styles.css')?>" rel="stylesheet">  
+    <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <style>
-        html {
-            overflow-y: auto;
+        .v-speed-dial {
+            bottom: 2rem;
+        }
+
+        .v-btn--floating {
+            position: relative;
         }
     </style>
 </head>
 
 <body>
+    <!-- ========================= preloader start ========================= -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-logo"><img src="<?= base_url('assets/images/Logo.png') ?>" alt="Preloader" width="64"></div>
+            <div class="spinner">
+                <div class="spinner-container">
+                    <div class="spinner-rotator">
+                        <div class="spinner-left">
+                            <div class="spinner-circle"></div>
+                        </div>
+                        <div class="spinner-right">
+                            <div class="spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
     <div id="app">
         <v-app>
-            <v-system-bar dark class="status-bar mt-n5"></v-system-bar>
-            <v-app-bar app color="purple darken-3" class="gde-purple-1 mt-5" dark elevation="3">
+            <v-app-bar app color="purple darken-3" class="gde-purple-1" dark elevation="3">
                 <v-app-bar-nav-icon color="yellow darken-2" x-large @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
                 <v-btn href="<?= base_url() ?>" text="true">
                     <v-toolbar-title style="cursor: pointer"></v-toolbar-title>
@@ -64,7 +86,7 @@
                 </v-btn>
             </v-app-bar>
 
-            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating absolute :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
+            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
                 <v-list dense elevation="2">
                     <v-list-item>
                         <v-list-item-action>
@@ -111,7 +133,7 @@
                 </v-list>
             </v-navigation-drawer>
 
-            <v-navigation-drawer v-model="rightMenu" app right temporary absolute bottom>
+            <v-navigation-drawer v-model="rightMenu" app right temporary bottom>
                 <template v-slot:prepend>
                     <v-list-item>
                         <v-list-item-content>
@@ -154,14 +176,33 @@
                     </v-btn>
                 </template>
             </v-snackbar>   
+            <v-speed-dial v-model="fab" :top="false" :bottom="true" :right="true" :left="false" direction="top" transition="slide-y-reverse-transition" :fixed="true">
+                <template v-slot:activator>
+                    <v-btn v-model="fab" color="purple darken-2" dark fab>
+                        <v-icon v-if="fab">
+                            mdi-close
+                        </v-icon>
+                        <v-icon v-else>
+                            mdi-account-circle
+                        </v-icon>
+                    </v-btn>
+                </template>
+                <v-btn fab dark small color="green">
+                    <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn fab dark small color="indigo">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </v-speed-dial>
         </v-app>
     </div>
 
-    <script src="https://vuejs.org/js/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="https://unpkg.com/vuetify-image-input"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <script src="https://vuejs.org/js/vue.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/main.js') ?>" type="text/javascript"></script>
 
     <script>
         var computedVue = {
@@ -272,6 +313,7 @@
                     link: 'https://www.instagram.com/amikom_purwokerto/?hl=id',
                 },
             ],
+            fab: false,
         }
         var methodsVue = {
             toggleTheme() {

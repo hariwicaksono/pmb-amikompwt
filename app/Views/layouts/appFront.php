@@ -9,15 +9,13 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
     <link href="<?= base_url('assets/css/styles.css')?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
 </head>
 
 <body>
     <!-- ========================= preloader start ========================= -->
     <div class="preloader">
         <div class="loader">
-            <div class="loader-logo"><img src="<?= base_url('assets/images/Logo.png') ?>" alt="Preloader Logo Amikom" width="64"></div>
+            <div class="loader-logo"><img src="<?= base_url('assets/images/Logo.png') ?>" alt="Preloader" width="64"></div>
             <div class="spinner">
                 <div class="spinner-container">
                     <div class="spinner-rotator">
@@ -170,7 +168,9 @@
             </v-snackbar>   
         </v-app>
     </div>
-
+    
+    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>

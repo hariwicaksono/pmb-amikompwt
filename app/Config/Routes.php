@@ -40,6 +40,14 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
 });
 
+$routes->group('calonsiswa', [], function ($routes) {
+	$routes->get('/', 'Siswa::index');
+    $routes->get('formulir', 'Siswa::formulir');
+    $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');
+    $routes->get('tupoksi', 'Tupoksi::index');
+    $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

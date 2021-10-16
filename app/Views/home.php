@@ -19,7 +19,7 @@
             <v-card>
                 <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
-                        <v-card-title class="text-h5"><strong>Fakultas</strong><br />{{item.name}}</v-card-title>
+                        <v-card-title class="text-h5"><strong>Fakultas</strong>{{item.name}}</v-card-title>
                         <v-card-actions>
                             <v-btn :href="item.link" class="ml-2 mt-5" outlined rounded>
                                 Selengkapnya
