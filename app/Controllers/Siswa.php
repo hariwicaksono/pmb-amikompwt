@@ -18,7 +18,7 @@ class Siswa extends BaseController
 
     public function index()
     {
-        //var_dump($this->thaPmb->getThaPmb());
+        //var_dump($this->thapmb->getThaPmb());
         //die;
         $tahun_lalu = '2020/2021';
 		$jumlah_akun = $this->user->countAllResults();
@@ -35,18 +35,13 @@ class Siswa extends BaseController
 
     public function formulir()
     {
-        //var_dump($this->thaPmb->getThaPmb());
+        //var_dump($this->thapmb->getThaPmb());
         //die;
-        $tahun_lalu = '2020/2021';
-		$jumlah_akun = $this->user->countAllResults();
-		$jumlah_calonsiswa = $this->calonsiswa->countAllResults();
-		$jumlah_tahunlalu = $this->calonsiswa->countTahunlalu($tahun_lalu);
-		$jumlah_beasiswa = $this->calonsiswa->countBeasiswa($tahun_lalu);
+        $tha = $this->thapmb->getThaPmb();
+		$siswa = $this->calonsiswa->where(['email' => 'test@gmail.com'])->first();
         return view('siswa/formulir',[
-            'jumlah_akun' => $jumlah_akun,
-            'jumlah_calonsiswa' => $jumlah_calonsiswa,
-            'jumlah_tahunlalu' => $jumlah_tahunlalu,
-            'jumlah_beasiswa' => $jumlah_beasiswa,
+            'tha_pmb' => $tha,
+            'siswa' => $siswa,
         ]);
     }
 }

@@ -2,14 +2,16 @@
 <?php $this->section("content"); ?>
 
 <div class="mb-3">
-    <v-card v-if="show == true">
-        <v-skeleton-loader type="image, image"></v-skeleton-loader>
-    </v-card>
-    <v-card v-if="show == false">
-        <v-carousel height="auto" cycle hide-delimiter-background>
-            <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow" :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="deep-purple fill-height">
-            </v-carousel-item>
-        </v-carousel>
+    <v-card>
+        <div v-if="show == true">
+            <v-skeleton-loader type="image, image"></v-skeleton-loader>
+        </div>
+        <div v-if="show == false">
+            <v-carousel height="auto" cycle hide-delimiter-background>
+                <v-carousel-item v-for="item in slideshows" :key="item.id_slideshow" :src="'https://pmb.amikompurwokerto.ac.id/files/2021/' + item.img_slideshow" class="deep-purple fill-height">
+                </v-carousel-item>
+            </v-carousel>
+        </div>
     </v-card>
 </div>
 

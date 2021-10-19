@@ -46,7 +46,7 @@
         <v-app>
             <v-app-bar app color="purple darken-3" class="gde-purple-1" dark elevation="3">
                 <v-app-bar-nav-icon color="yellow darken-2" x-large @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
-                <v-btn href="<?= base_url() ?>" text="true">
+                <v-btn href="<?= base_url() ?>" text>
                     <v-toolbar-title style="cursor: pointer"></v-toolbar-title>
                 </v-btn>
                 <v-spacer></v-spacer>
@@ -197,13 +197,18 @@
         </v-app>
     </div>
 
-    <script src="https://vuejs.org/js/vue.min.js" type="text/javascript"></script>
+    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.min.js" integrity="sha512-he8U4ic6kf3kustvJfiERUpojM8barHoz0WYpAUDWQVn61efpm3aVAD8RWL8OloaDDzMZ1gZiubF9OSdYBqHfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?= base_url('assets/js/main.js') ?>" type="text/javascript"></script>
 
+    <script>
+        moment().format();
+    </script>
     <script>
         var computedVue = {
             isMobile() {
@@ -323,8 +328,18 @@
             dialogOpen: function() {
                 this.dialog = true;
             },
+            momentDate(value) {
+                if (value) {
+                    return moment(String(value)).format('d MMMM YYYY')
+                }
+            },
         }
         Vue.component('paginate', VuejsPaginate)
+        //Vue.filter('moment', function(value) {
+            //if (value) {
+                //return moment(String(value)).format('MM/DD/YYYY')
+            //}
+        //});
     </script>
     <?= $this->renderSection('js') ?>
     <script>

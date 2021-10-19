@@ -6,12 +6,10 @@
         <v-skeleton-loader type="image"></v-skeleton-loader>
     </v-card>
     <v-card v-if="show == false">
-        <v-card>
-            <v-img class="deep-purple white--text align-end" height="150px">
-                <v-card-title class="text-h5">Agus Harimurti</v-card-title>
-                <v-card-subtitle class="mb-3">email@gmail.com</v-card-subtitle>
-            </v-img>
-        </v-card>
+        <v-img class="deep-purple white--text align-end" height="150px">
+            <v-card-title class="text-h5">Agus Harimurti</v-card-title>
+            <v-card-subtitle class="mb-3">email@gmail.com</v-card-subtitle>
+        </v-img>
     </v-card>
 </div>
 

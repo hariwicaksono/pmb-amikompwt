@@ -38,6 +38,7 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');
     $routes->get('tupoksi', 'Tupoksi::index');
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
+    $routes->get('calonsiswa', 'Calonsiswa::index');
 });
 
 $routes->group('calonsiswa', [], function ($routes) {
