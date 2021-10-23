@@ -168,7 +168,7 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>
 
-            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout">
+            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:20px;">
                 <span v-if="snackbar">{{snackbarMessage}}</span>
                 <template v-slot:action="{ attrs }">
                     <v-btn text v-bind="attrs" @click="snackbar = false">
@@ -176,6 +176,7 @@
                     </v-btn>
                 </template>
             </v-snackbar>   
+
             <v-speed-dial v-model="fab" :top="false" :bottom="true" :right="true" :left="false" direction="top" transition="slide-y-reverse-transition" :fixed="true">
                 <template v-slot:activator>
                     <v-btn v-model="fab" color="purple darken-2" dark fab>
@@ -330,15 +331,15 @@
             },
             momentDate(value) {
                 if (value) {
-                    return moment(String(value)).format('d MMMM YYYY')
+                    return moment(String(value)).format('DD-MM-YYYY hh:mm:ss')
                 }
             },
         }
         Vue.component('paginate', VuejsPaginate)
         //Vue.filter('moment', function(value) {
-            //if (value) {
-                //return moment(String(value)).format('MM/DD/YYYY')
-            //}
+        //if (value) {
+        //return moment(String(value)).format('MM/DD/YYYY')
+        //}
         //});
     </script>
     <?= $this->renderSection('js') ?>

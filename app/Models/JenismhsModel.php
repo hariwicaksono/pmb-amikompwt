@@ -4,11 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DepartmentModel extends Model
+class JenismhsModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'DEPARTMENT';
-    protected $primaryKey           = 'KD_DEPT';
+    protected $table                = 'MASTER_JENISMHS';
+    protected $primaryKey           = 'ID_JENISMHS';
     protected $useAutoIncrement     = false;
     protected $insertID             = 0;
     protected $returnType           = 'array';
@@ -40,5 +40,5 @@ class DepartmentModel extends Model
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
 
-
+    
 }

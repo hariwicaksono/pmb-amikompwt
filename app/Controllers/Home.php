@@ -8,23 +8,26 @@ use App\Models\UserModel;
 
 class Home extends BaseController
 {
+    protected $tahun_pmb = null;
+
     public function __construct()
     {
-        $this->thapmb = new ThaPmbModel();
-        $this->calonsiswa = new CalonsiswaModel();
-        $this->user = new UserModel();
+        $this->mtahun = new ThaPmbModel();
+        $this->mcalonsiswa = new CalonsiswaModel();
+        $this->muser = new UserModel();
 
+        $this->tahun_pmb = $this->mtahun->getThaPmb();
     }
 
     public function index()
     {
-        //var_dump($this->thaPmb->getThaPmb());
+        //var_dump($this->tahun_pmb);
         //die;
         $tahun_lalu = '2020/2021';
-		$jumlah_akun = $this->user->countAllResults();
-		$jumlah_calonsiswa = $this->calonsiswa->countAllResults();
-		$jumlah_tahunlalu = $this->calonsiswa->countTahunlalu($tahun_lalu);
-		$jumlah_beasiswa = $this->calonsiswa->countBeasiswa($tahun_lalu);
+		$jumlah_akun = $this->muser->countAllResults();
+		$jumlah_calonsiswa = $this->mcalonsiswa->countAllResults();
+		$jumlah_tahunlalu = $this->mcalonsiswa->countTahunlalu($tahun_lalu);
+		$jumlah_beasiswa = $this->mcalonsiswa->countBeasiswa($tahun_lalu);
         return view('home',[
             'jumlah_akun' => $jumlah_akun,
             'jumlah_calonsiswa' => $jumlah_calonsiswa,

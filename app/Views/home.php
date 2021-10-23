@@ -289,9 +289,6 @@
                     this.loading = false
                 })
         },
-        clear() {
-            this.$refs.form.reset()
-        },
         counterJumlah() {
             anime({
                 targets: this.$data,

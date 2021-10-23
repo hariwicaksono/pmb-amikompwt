@@ -9,7 +9,7 @@ class CalonsiswaModel extends Model
     protected $DBGroup              = 'default';
     protected $table                = 'calonsiswa';
     protected $primaryKey           = 'nodaf';
-    protected $useAutoIncrement     = true;
+    protected $useAutoIncrement     = false;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
@@ -39,7 +39,6 @@ class CalonsiswaModel extends Model
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
-
 
     public function countTahunlalu($tahun_lalu = null)
     {

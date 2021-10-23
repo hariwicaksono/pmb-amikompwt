@@ -3,16 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\CalonsiswaModel;
+use App\Models\GelombangModel;
 use App\Models\ThaPmbModel;
 use App\Models\UserModel;
 
 class Siswa extends BaseController
 {
+    protected $tahun_pmb = null;
+
     public function __construct()
     {
-        $this->thapmb = new ThaPmbModel();
-        $this->calonsiswa = new CalonsiswaModel();
-        $this->user = new UserModel();
+        $this->mcalonsiswa = new CalonsiswaModel();
+        $this->mtahun = new ThaPmbModel();
+        $this->muser = new UserModel();
+        $this->mgelombang = new GelombangModel();
+
+        $this->tahun_pmb = $this->mtahun->getThaPmb();
 
     }
 
@@ -21,10 +27,10 @@ class Siswa extends BaseController
         //var_dump($this->thapmb->getThaPmb());
         //die;
         $tahun_lalu = '2020/2021';
-		$jumlah_akun = $this->user->countAllResults();
-		$jumlah_calonsiswa = $this->calonsiswa->countAllResults();
-		$jumlah_tahunlalu = $this->calonsiswa->countTahunlalu($tahun_lalu);
-		$jumlah_beasiswa = $this->calonsiswa->countBeasiswa($tahun_lalu);
+		$jumlah_akun = $this->muser->countAllResults();
+		$jumlah_calonsiswa = $this->mcalonsiswa->countAllResults();
+		$jumlah_tahunlalu = $this->mcalonsiswa->countTahunlalu($tahun_lalu);
+		$jumlah_beasiswa = $this->mcalonsiswa->countBeasiswa($tahun_lalu);
         return view('siswa/index',[
             'jumlah_akun' => $jumlah_akun,
             'jumlah_calonsiswa' => $jumlah_calonsiswa,
@@ -35,12 +41,12 @@ class Siswa extends BaseController
 
     public function formulir()
     {
-        //var_dump($this->thapmb->getThaPmb());
-        //die;
-        $tha = $this->thapmb->getThaPmb();
-		$siswa = $this->calonsiswa->where(['email' => 'test@gmail.com'])->first();
+        $siswa = $this->mcalonsiswa->where(['email' => 'test@gmail.com'])->first();
+        $tha = $this->tahun_pmb;
+        $gelombang= $this->mgelombang->cek_daftar(['thn_akademik'=>$tha]);
         return view('siswa/formulir',[
             'tha_pmb' => $tha,
+            'gelombang' => $gelombang['kode'],
             'siswa' => $siswa,
         ]);
     }

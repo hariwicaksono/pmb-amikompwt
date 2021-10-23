@@ -39,6 +39,11 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('tupoksi', 'Tupoksi::index');
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
     $routes->get('calonsiswa', 'Calonsiswa::index');
+    $routes->post('calonsiswa/save', 'Calonsiswa::create');
+    $routes->get('jenismhs', 'JenisMhs::index');
+    $routes->get('jenismhs/get', 'JenisMhs::getJenismhs');
+    $routes->get('programstudi', 'ProgramStudi::index');
+    $routes->get('programstudi/get', 'ProgramStudi::getProdi');
 });
 
 $routes->group('calonsiswa', [], function ($routes) {
