@@ -159,14 +159,14 @@
             </v-navigation-drawer>
 
             <v-main>
-                <v-container class="px-6" fluid>
+                <v-container class="px-8" fluid>
                     <?= $this->renderSection('content') ?>
                 </v-container>
             </v-main>
 
-            <p class="mx-auto">
+            <!--<p class="mx-auto">
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
-            </p>
+            </p>-->
 
             <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:20px;">
                 <span v-if="snackbar">{{snackbarMessage}}</span>
@@ -177,9 +177,9 @@
                 </template>
             </v-snackbar>   
 
-            <v-speed-dial v-model="fab" :top="false" :bottom="true" :right="true" :left="false" direction="top" transition="slide-y-reverse-transition" :fixed="true">
+            <!--<v-speed-dial v-model="fab" :top="false" :bottom="true" :right="true" :left="false" direction="top" transition="slide-y-reverse-transition" :fixed="true">
                 <template v-slot:activator>
-                    <v-btn v-model="fab" color="purple darken-2" dark fab>
+                    <v-btn v-model="fab" color="purple" dark fab>
                         <v-icon v-if="fab">
                             mdi-close
                         </v-icon>
@@ -194,7 +194,7 @@
                 <v-btn fab dark small color="indigo">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
-            </v-speed-dial>
+            </v-speed-dial>-->
         </v-app>
     </div>
 
@@ -329,9 +329,14 @@
             dialogOpen: function() {
                 this.dialog = true;
             },
-            momentDate(value) {
+            dateYmdHis(value) {
                 if (value) {
                     return moment(String(value)).format('DD-MM-YYYY hh:mm:ss')
+                }
+            },
+            dateYmd(value) {
+                if (value) {
+                    return moment(String(value)).format('DD-MM-YYYY')
                 }
             },
         }
