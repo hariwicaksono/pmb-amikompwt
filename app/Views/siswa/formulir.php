@@ -6,10 +6,10 @@
 <div class="mb-4">
     <v-card>
         <v-card-title>
-            1. Pendaftaran
+            <v-icon color="purple" class="mr-1">mdi-file-document-edit</v-icon> Pendaftaran
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-3" dark v-if="!data_daftar.nodaf" @click="dialogOpen">
-                <v-icon>mdi-file-document-edit</v-icon>&nbsp; Daftar
+            <v-btn color="purple" dark v-if="!data_daftar.nodaf" @click="modalDaftarOpen">
+                Daftar
             </v-btn>
         </v-card-title>
         <v-card-text>
@@ -51,7 +51,7 @@
         <v-card-title>
             <?= lang('App.dataDiri') ?>
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-3" dark>
+            <v-btn color="orange darken-2" dark>
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -199,13 +199,13 @@
 <!-- Modal Save -->
 <template>
     <v-row justify="center">
-        <v-dialog v-model="dialog" width="600" persistent>
+        <v-dialog v-model="modalDaftar" width="600" persistent>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn icon dark @click="dialogClose">
+                        <v-btn icon dark @click="modalDaftarClose">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                     </v-toolbar-items>
@@ -214,9 +214,10 @@
                     <v-card-text>
                         <v-container :fluid="true">
                             <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+
                             <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
 
-                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="numberRules" outlined v-if="select_daftar == 'KIP-Kuliah'"></v-text-field>
+                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="numberRules"  v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
 
                             <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" outlined></v-select>
 
@@ -243,8 +244,9 @@
             </v-card>
         </v-dialog>
     </v-row>
-</template>     
-<!-- End Modal Save Product -->
+</template> 
+   
+<!-- End Modal Save -->
 
 <?php $this->endSection("content") ?>
 
@@ -288,8 +290,7 @@
     }
     dataVue = {
         ...dataVue,
-        dialog: false,
-        show1: false,
+        modalDaftar: false,
         gelombang: "<?= $gelombang ?>",
         data_daftar: [],
         select_daftar: null,
@@ -310,18 +311,6 @@
         nama: "",
         email: "",
         no_kipk: "",
-        textRules: [
-            v => !!v || '<?= lang("App.isRequired") ?>',
-        ],
-        emailRules: [
-            v => !!v || '<?= lang("App.emailRequired") ?>',
-            v => /.+@.+/.test(v) || '<?= lang("App.emailValid") ?>',
-        ],
-        numberRules: [
-            v => !!v || '<?= lang("App.isRequired") ?>',
-            v => Number.isInteger(Number(v)) || "The value must be an integer number",
-            v => v > 0 || "The value must be greater than zero"
-        ],
     }
     methodsVue = {
         ...methodsVue,
@@ -331,12 +320,12 @@
         resetValidation() {
             this.$refs.form.resetValidation();
         },
-        dialogOpen: function() {
-            this.dialog = true;
+        modalDaftarOpen: function() {
+            this.modalDaftar = true;
             this.notifType = '';
         },
-        dialogClose: function() {
-            this.dialog = false;
+        modalDaftarClose: function() {
+            this.modalDaftar = false;
             this.select_daftar = null,
                 this.select_jenismhs = null,
                 this.select_prodi = [],

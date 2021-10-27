@@ -50,18 +50,11 @@
                     <v-toolbar-title style="cursor: pointer"></v-toolbar-title>
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn text color="yellow darken-2" x-large class="d-none d-lg-block" @click="dialogOpen">
-                    <v-icon>mdi-login-variant</v-icon> &nbsp;Login
-                </v-btn>
-
-                <v-btn icon color="yellow darken-3" x-large class="d-block d-lg-none" @click="dialogOpen">
-                    <v-icon>mdi-login-variant</v-icon>
-                </v-btn>
 
                 <?php if (!empty(session()->get('username'))) : ?>
                     <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn icon v-bind="attrs" v-on="on">
+                            <v-btn color="yellow darken-3" icon v-bind="attrs" v-on="on">
                                 <v-icon>mdi-account-circle</v-icon>
                             </v-btn>
                         </template>
@@ -81,7 +74,7 @@
                         </v-list>
                     </v-menu>
                 <?php endif; ?>
-                <v-btn icon @click.stop="rightMenu = !rightMenu">
+                <v-btn color="yellow darken-3" icon @click.stop="rightMenu = !rightMenu">
                     <v-icon>mdi-cog-outline</v-icon>
                 </v-btn>
             </v-app-bar>
@@ -265,6 +258,7 @@
             snackbarType: '',
             snackbarMessage: '',
             show: false,
+            show1: false,
             navbarItems: [{
                     text: 'Real-Time',
                     icon: 'mdi-clock'
@@ -320,6 +314,18 @@
                 },
             ],
             fab: false,
+            textRules: [
+                v => !!v || '<?= lang("App.isRequired") ?>',
+            ],
+            emailRules: [
+                v => !!v || '<?= lang("App.emailRequired") ?>',
+                v => /.+@.+/.test(v) || '<?= lang("App.emailValid") ?>',
+            ],
+            numberRules: [
+                v => !!v || '<?= lang("App.isRequired") ?>',
+                v => Number.isInteger(Number(v)) || "The value must be an integer number",
+                v => v > 0 || "The value must be greater than zero"
+            ],
         }
         var methodsVue = {
             toggleTheme() {

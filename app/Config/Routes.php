@@ -32,6 +32,15 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get("/lang/{locale}", "Home::setLanguage");
+$routes->get('/login', 'Auth::login');
+$routes->get('/register', 'Auth::register');
+$routes->get('/logout', 'Auth::logout');
+$routes->get('/verify_email', "Auth::verifyEmail");
+$routes->group('password', function ($routes) {
+	$routes->get('reset', 'Auth::passwordReset');
+	$routes->get('change', 'Auth::passwordChange');
+});
 
 $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
 	$routes->get('slideshow', 'Slideshow::index');
@@ -46,7 +55,7 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('programstudi/get', 'ProgramStudi::getProdi');
 });
 
-$routes->group('calonsiswa', [], function ($routes) {
+$routes->group('calonsiswa', ['filter' => 'auth'], function ($routes) {
 	$routes->get('/', 'Siswa::index');
     $routes->get('formulir', 'Siswa::formulir');
     $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -7,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"> 
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
-    <link href="<?= base_url('assets/css/styles.css')?>" rel="stylesheet">  
+    <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
@@ -36,15 +37,15 @@
         <v-app>
             <v-app-bar app color="purple darken-3" class="gde-purple-1" dark elevate-on-scroll>
                 <v-app-bar-nav-icon color="yellow darken-2" x-large @click.stop="sidebarMenu = !sidebarMenu"></v-app-bar-nav-icon>
-                <v-btn href="<?= base_url() ?>" text="true">
+                <v-btn href="<?= base_url() ?>" text>
                     <v-toolbar-title style="cursor: pointer">AMIKOM</v-toolbar-title>
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn text color="yellow darken-2" x-large class="d-none d-lg-block" @click="dialogOpen">
+                <v-btn text color="yellow darken-2" x-large class="d-none d-lg-block" @click="modalAuthOpen">
                     <v-icon>mdi-login-variant</v-icon> &nbsp;Login
                 </v-btn>
 
-                <v-btn icon color="yellow darken-3" x-large class="d-block d-lg-none" @click="dialogOpen">
+                <v-btn icon color="yellow darken-3" x-large class="d-block d-lg-none" @click="modalAuthOpen">
                     <v-icon>mdi-login-variant</v-icon>
                 </v-btn>
 
@@ -76,7 +77,7 @@
                 </v-btn>
             </v-app-bar>
 
-            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating  :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
+            <v-navigation-drawer class="gdb-purple-1 yellow--text text--darken-2" v-model="sidebarMenu" app floating :permanent="sidebarMenu" :mini-variant.sync="mini" v-if="!isMobile">
                 <v-list dense elevation="2">
                     <v-list-item>
                         <v-list-item-action>
@@ -158,6 +159,73 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>
 
+            <v-dialog v-model="modalAuth" persistent max-width="600px" min-width="600px">
+                <div>
+                    <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
+                        <v-tabs-slider color="purple darken-4"></v-tabs-slider>
+                        <v-tab v-for="(item, i) in tabs" :key="i">
+                            <v-icon large>{{ item.icon }}</v-icon>
+                            <div class="subtitle-2 py-1">{{ item.name }}</div>
+                        </v-tab>
+                        <v-tab-item>
+                            <v-card class="px-4">
+                                <v-card-text>
+                                    <v-form ref="formLogin" v-model="valid">
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <v-text-field v-model="loginEmail" :rules="emailRules" label="E-mail"></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-text-field v-model="loginPassword" :append-icon="show?'mdi-eye':'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show = !show"></v-text-field>
+                                            </v-col>
+                                            <v-col class="d-flex" cols="12" sm="6" xsm="12">
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                            <v-col cols="12">
+                                                <v-layout>
+                                                    <a class="subtitle-2" href="<?= base_url('/password/reset') ?>"><?= lang('App.forgotPass') ?></a>
+                                                    <v-spacer></v-spacer>
+                                                    <v-btn text large class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
+                                                    <v-btn large color="purple" dark :loading="loading" @click="submitLogin">Login</v-btn>
+                                                </v-layout>
+                                            </v-col>
+                                        </v-row>
+                                    </v-form>
+                                </v-card-text>
+                            </v-card>
+                        </v-tab-item>
+                        <v-tab-item>
+                            <v-card class="px-4">
+                                <v-card-text>
+                                    <v-form ref="registerForm" v-model="valid">
+                                        <v-row>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="firstName" :rules="[rules.required]" label="First Name" maxlength="20" required></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="lastName" :rules="[rules.required]" label="Last Name" maxlength="20" required></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Confirm Password" counter @click:append="show1 = !show1"></v-text-field>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                            <v-btn class="mb-1" large block color="purple white--text">Register</v-btn>
+                                            <v-btn text block class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
+                                        </v-row>
+                                    </v-form>
+                                </v-card-text>
+                            </v-card>
+                        </v-tab-item>
+                    </v-tabs>
+                </div>
+            </v-dialog>
+
             <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout">
                 <span v-if="snackbar">{{snackbarMessage}}</span>
                 <template v-slot:action="{ attrs }">
@@ -168,15 +236,15 @@
             </v-snackbar>   
         </v-app>
     </div>
-    
+
     <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
     <script src="https://unpkg.com/animejs@2.2.0/anime.min.js" type="text/javascript"></script>
-    <script src="<?= base_url('assets/js/main.js')?>" type="text/javascript"></script>
-    
+    <script src="<?= base_url('assets/js/main.js') ?>" type="text/javascript"></script>
+
     <script>
         var computedVue = {
             isMobile() {
@@ -222,6 +290,7 @@
             toggleMini: false,
             dark: false,
             loading: false,
+            modalAuth: false,
             valid: true,
             textRules: [],
             emailRules: [],
@@ -232,6 +301,7 @@
             snackbarType: '',
             snackbarMessage: '',
             show: false,
+            show1: false,
             navbarItems: [{
                     text: 'Real-Time',
                     icon: 'mdi-clock'
@@ -286,14 +356,85 @@
                     link: 'https://www.instagram.com/amikom_purwokerto/?hl=id',
                 },
             ],
+            tab: 0,
+            tabs: [{
+                    name: "Login",
+                    icon: "mdi-account"
+                },
+                {
+                    name: "Register",
+                    icon: "mdi-account-outline"
+                }
+            ],
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            verify: "",
+            loginEmail: "",
+            loginPassword: "",
+            emailRules: [
+                v => !!v || "Required",
+                v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+            ],
+            rules: {
+                required: value => !!value || "Required.",
+                min: v => (v && v.length >= 8) || "Min 8 characters"
+            },
         }
         var methodsVue = {
             toggleTheme() {
                 this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
                 localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
             },
-            dialogOpen: function() {
-                this.dialog = true;
+            modalAuthOpen: function() {
+                this.modalAuth = true;
+            },
+            modalAuthClose: function() {
+                this.modalAuth = false;
+                this.loginEmail = "";
+                this.loginPassword = "";
+                this.$refs.formLogin.resetValidation();
+            },
+            submitLogin() {
+                this.loading = true;
+                axios({
+                        method: 'post',
+                        url: '/api/auth/login',
+                        data: {
+                            email: this.loginEmail,
+                            password: this.loginPassword,
+                        },
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(res => {
+                        // handle success
+                        this.loading = false
+                        var data = res.data;
+                        if (data.status == true) {
+                            localStorage.setItem('access_token', JSON.stringify(data.access_token));
+                            this.snackbar = true;
+                            this.snackbarType = "success";
+                            this.snackbarMessage = data.message;
+                            this.modalAuth = false;
+                            this.$refs.formLogin.resetValidation();
+                            setTimeout(() => window.location.reload(), 1000);
+                        } else {
+                            this.notifType = "error";
+                            this.notifMessage = data.message;
+                            this.snackbar = true;
+                            this.snackbarType = "warning";
+                            this.snackbarMessage = data.message.email || data.message.password;
+                            this.$refs.formLogin.validate();
+                        }
+                    })
+                    .catch(err => {
+                        // handle error
+                        console.log(err);
+                        this.loading = false
+                    })
             },
         }
         Vue.component('paginate', VuejsPaginate)
@@ -314,4 +455,5 @@
         })
     </script>
 </body>
+
 </html>

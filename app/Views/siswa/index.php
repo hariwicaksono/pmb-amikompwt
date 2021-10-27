@@ -7,8 +7,8 @@
     </v-card>
     <v-card v-if="show == false">
         <v-img class="deep-purple white--text align-end" height="150px">
-            <v-card-title class="text-h5">Agus Harimurti</v-card-title>
-            <v-card-subtitle class="mb-3">email@gmail.com</v-card-subtitle>
+            <v-card-title class="text-h5"><?= session()->get('nama') ?></v-card-title>
+            <v-card-subtitle class="mb-3"><?= session()->get('email') ?></v-card-subtitle>
         </v-img>
     </v-card>
 </div>
@@ -69,64 +69,16 @@
 
     computedVue = {
         ...computedVue,
-        passwordMatch() {
-            return () => this.password === this.verify || "Password must match";
-        },
-        intJumlahAkun() {
-            return Math.trunc(this.count1).toLocaleString()
-        },
-        intJumlahCalonsiswa() {
-            return Math.trunc(this.count2).toLocaleString()
-        },
-        intJumlahTahunlalu() {
-            return Math.trunc(this.count3).toLocaleString()
-        },
-        intJumlahBeasiswa() {
-            return Math.trunc(this.count4).toLocaleString()
-        }
+
     }
     createdVue = function() {
-        this.getSlides();
+        
     }
     var mountedVue = function() {
-        this.counterJumlah();
+        
     }
     dataVue = {
         ...dataVue,
-        dialog: false,
-        tab: 0,
-        tabs: [{
-                name: "Login",
-                icon: "mdi-account"
-            },
-            {
-                name: "Register",
-                icon: "mdi-account-outline"
-            }
-        ],
-        valid: true,
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        verify: "",
-        loginPassword: "",
-        loginEmail: "",
-        loginEmailRules: [
-            v => !!v || "Required",
-            v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-        ],
-        emailRules: [
-            v => !!v || "Required",
-            v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-        ],
-
-        show1: false,
-        rules: {
-            required: value => !!value || "Required.",
-            min: v => (v && v.length >= 8) || "Min 8 characters"
-        },
-        slideshows: [],
         cardFakultas: [{
                 name: "Ilmu Komputer",
                 img: "http://pmb.amikompurwokerto.ac.id/assets/main/images/iconpack/web-development_2210153.png",
@@ -138,14 +90,6 @@
                 link: "http://fbis.amikompurwokerto.ac.id",
             }
         ],
-        count1: startCount,
-        count2: startCount,
-        count3: startCount,
-        count4: startCount,
-        jumlahAkun: <?= $jumlah_akun ?>,
-        jumlahCalonsiswa: <?= $jumlah_calonsiswa ?>,
-        jumlahTahunlalu: <?= $jumlah_tahunlalu ?>,
-        jumlahBeasiswa: <?= $jumlah_beasiswa ?>,
         menuItems: [{
                 title: 'Formulir',
                 icon: 'mdi-form-select',
@@ -174,87 +118,7 @@
     }
     methodsVue = {
         ...methodsVue,
-        validate() {
-            if (this.$refs.loginForm.validate()) {
-                // submit form to server/API here...
-            }
-        },
-        reset() {
-            this.$refs.form.reset();
-        },
-        resetValidation() {
-            this.$refs.loginForm.resetValidation();
-            this.$refs.registerForm.resetValidation();
-        },
-        dialogClose: function() {
-            this.dialog = false;
-            this.resetValidation();
-        },
-        getSlides: function() {
-            this.show = true;
-            axios.get(`/api/slideshow`)
-                .then(res => {
-                    // handle success
-                    var data = res.data;
-                    this.slideshows = data.data;
-                    this.show = false;
-                })
-                .catch(err => {
-                    // handle error
-                    console.log(err.response);
-                })
-        },
-        submit() {
-            this.loading = true;
-            axios({
-                    method: 'post',
-                    url: '/api/auth/login',
-                    data: {
-                        email: this.email,
-                        password: this.password,
-                    },
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then(res => {
-                    // handle success
-                    this.loading = false
-                    var data = res.data;
-                    if (data.status == true) {
-                        localStorage.setItem('access_token', JSON.stringify(data.access_token));
-                        this.snackbar = true;
-                        this.snackbarType = "success";
-                        this.snackbarMessage = data.message;
-                        this.$refs.form.resetValidation();
-                        setTimeout(() => window.location.reload(), 1000);
-                    } else {
-                        this.notifType = "error";
-                        this.notifMessage = data.message;
-                        this.snackbar = true;
-                        this.snackbarType = "warning";
-                        this.snackbarMessage = data.message.email || data.message.password;
-                        this.$refs.form.validate();
-                    }
-                })
-                .catch(err => {
-                    // handle error
-                    console.log(err.response);
-                    this.loading = false
-                })
-        },
-        counterJumlah() {
-            anime({
-                targets: this.$data,
-                count1: this.jumlahAkun,
-                count2: this.jumlahCalonsiswa,
-                count3: this.jumlahTahunlalu,
-                count4: this.jumlahBeasiswa,
-                duration: 10000,
-                delay: 200,
-                easing: 'easeInOutCubic',
-            })
-        },
+
     }
 </script>
 <?php $this->endSection("js") ?>

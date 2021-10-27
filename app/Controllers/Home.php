@@ -21,8 +21,7 @@ class Home extends BaseController
 
     public function index()
     {
-        //var_dump($this->tahun_pmb);
-        //die;
+        if ($this->session->logged_in == true) {return redirect()->to('/calonsiswa');} 
         $tahun_lalu = '2020/2021';
 		$jumlah_akun = $this->muser->countAllResults();
 		$jumlah_calonsiswa = $this->mcalonsiswa->countAllResults();

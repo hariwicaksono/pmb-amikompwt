@@ -89,7 +89,7 @@ class Auth extends BaseControllerApi
             helper('jwt');
 
             $setSession = [
-                //'id' => $user['user_id'],
+                'nama' => $user['nama'],
                 'email' => $user['email'],
                 'username' => $user['username'],
                 'logged_in' => true
