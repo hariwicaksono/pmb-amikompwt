@@ -22,4 +22,5 @@ return [
     "dataDiri" => "Personal Data",
 
     "forgotPass" => "Forgot Password",
+    "save" => "Save",
 ];

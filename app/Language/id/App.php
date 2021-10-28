@@ -23,4 +23,5 @@ return [
     "dataDiri" => "Data Diri",
 
     "forgotPass" => "Lupa Password",
+    "save" => "Simpan",
 ];

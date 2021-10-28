@@ -191,3 +191,17 @@
     transform: rotate(5deg); }
   to {
     transform: rotate(-130deg); } }
+
+.v-speed-dial {
+  bottom: 2rem; }
+
+.v-btn--floating {
+  position: relative; }
+
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+  font-weight: normal;
+  font-size: 18px; }
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+  font-weight: normal;
+  font-size: 16px; }

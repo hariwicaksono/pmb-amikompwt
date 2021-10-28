@@ -23,7 +23,7 @@ class Calonsiswa extends BaseControllerApi
 
     public function index()
     {
-        $data = $this->model->where(['email' => 'ahera@ampu.id'])->first();
+        $data = $this->model->where(['email' => $this->session->email])->first();
 
         if ($data) {
             $response = [

@@ -11,15 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
     <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <style>
-        .v-speed-dial {
-            bottom: 2rem;
-        }
-
-        .v-btn--floating {
-            position: relative;
-        }
-    </style>
 </head>
 
 <body>
@@ -54,7 +45,7 @@
                 <?php if (!empty(session()->get('username'))) : ?>
                     <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="yellow darken-3" icon v-bind="attrs" v-on="on">
+                            <v-btn color="yellow darken-3" icon x-large v-bind="attrs" v-on="on">
                                 <v-icon>mdi-account-circle</v-icon>
                             </v-btn>
                         </template>
@@ -74,7 +65,7 @@
                         </v-list>
                     </v-menu>
                 <?php endif; ?>
-                <v-btn color="yellow darken-3" icon @click.stop="rightMenu = !rightMenu">
+                <v-btn color="yellow darken-3" icon x-large @click.stop="rightMenu = !rightMenu">
                     <v-icon>mdi-cog-outline</v-icon>
                 </v-btn>
             </v-app-bar>

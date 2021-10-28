@@ -8,8 +8,11 @@
         <v-card-title>
             <v-icon color="purple" class="mr-1">mdi-file-document-edit</v-icon> Pendaftaran
             <v-spacer></v-spacer>
-            <v-btn color="purple" dark v-if="!data_daftar.nodaf" @click="modalDaftarOpen">
-                Daftar
+            <v-btn color="orange darken-2" class="white--text" @click="modalDaftarOpen" v-if="!data_daftar.nodaf">
+                <v-icon>mdi-file-document-edit</v-icon>
+            </v-btn>
+            <v-btn color="orange darken-2" class="white--text" @click="editDaftar(data_daftar)" v-else>
+                <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
         <v-card-text>
@@ -73,15 +76,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ data_daftar.nama ? data_daftar.nama:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.nama ? data_daftar.nama:'—'}}</td>
                             <td>{{ data_daftar.nikktp ? data_daftar.nikktp:'—'}}</td>
                             <td>{{ data_daftar.jk ? data_daftar.jk:'—'}}</td>
                             <td>{{ data_daftar.tempatlahir ? data_daftar.tempatlahir:'—'}}/{{ data_daftar.tgllahir ? dateYmd(data_daftar.tgllahir):'—'}}</td>
                             <td>{{ data_daftar.AGAMA ? data_daftar.AGAMA:'—'}}</td>
                             <td>{{ data_daftar.status_pernikahan ? data_daftar.status_pernikahan:'—'}}</td>
                             <td>{{ data_daftar.telepon ? data_daftar.telepon:'—'}}</td>
-                            <td>{{ data_daftar.alamat ? data_daftar.alamat:'—'}}</td>
-                            <td>{{ data_daftar.deskripsi_alamat ? data_daftar.deskripsi_alamat:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.alamat ? data_daftar.alamat:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.deskripsi_alamat ? data_daftar.deskripsi_alamat:'—'}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -112,7 +115,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ data_daftar.sekolah ? data_daftar.sekolah:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.sekolah ? data_daftar.sekolah:'—'}}</td>
                             <td>{{ data_daftar.jurusan ? data_daftar.jurusan:'—'}}</td>
                             <td>{{ data_daftar.nem ? data_daftar.nem:'—'}}</td>
                             <td>{{ data_daftar.tahun_lulus ? data_daftar.tahun_lulus:'—'}}</td>
@@ -146,8 +149,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ data_daftar.NAMA_ORTU ? data_daftar.NAMA_ORTU:'—'}}</td>
-                            <td>{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.NAMA_ORTU ? data_daftar.NAMA_ORTU:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
                             <td>{{ data_daftar.PEKERJAAN_ORTU ? data_daftar.PEKERJAAN_ORTU:'—'}}</td>
                             <td>{{ data_daftar.TELP_ORTU ? data_daftar.TELP_ORTU:'—'}}</td>
                         </tr>
@@ -180,8 +183,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ data_daftar.NAMA_AYAH ? data_daftar.NAMA_AYAH:'—'}}</td>
-                            <td>{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.NAMA_AYAH ? data_daftar.NAMA_AYAH:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
                             <td>{{ data_daftar.PEKERJAAN_AYAH ? data_daftar.PEKERJAAN_AYAH:'—'}}</td>
                             <td>{{ data_daftar.TELP_AYAH ? data_daftar.TELP_AYAH:'—'}}</td>
                         </tr>
@@ -192,7 +195,7 @@
     </v-card>
 </div>
 
-<v-btn color="primary" elevation="2" dark large>
+<v-btn color="purple" class="white--text" elevation="2" large :disabled="data_daftar.syarat2 == 'Sudah' ? true:false">
     <v-icon>mdi-content-save</v-icon>&nbsp; Simpan &amp; Selesai
 </v-btn>
 
@@ -228,7 +231,7 @@
                             <v-text-field label="<?= lang('App.nama') ?> *" v-model="nama" :rules="textRules" outlined>
                             </v-text-field>
 
-                            <v-text-field label="<?= lang('App.email') ?> *" v-model="email" :rules="emailRules" outlined>
+                            <v-text-field label="<?= lang('App.email') ?> *" v-model="email" :rules="emailRules" outlined disabled>
                             </v-text-field>
                         </v-container>
                     </v-card-text>
@@ -238,15 +241,63 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark @click="saveDaftar" :loading="loading">
-                        <?= lang('App.submit') ?>
+                        <?= lang('App.save') ?>
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
     </v-row>
 </template> 
-   
 <!-- End Modal Save -->
+
+<template>
+    <v-row justify="center">
+        <v-dialog v-model="modalEditDaftar" width="600" persistent>
+            <v-card>
+                <v-toolbar dark color="purple">
+                    <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn icon dark @click="editDaftarClose">
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+                <v-form ref="form" v-model="valid">
+                    <v-card-text>
+                        <v-container :fluid="true">
+                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                            
+                            <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
+
+                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="numberRules"  v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
+
+                            <v-select v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" outlined></v-select>
+
+                            <v-select v-model="select_prodiEdit" :items="list_prodiEdit" item-text="NAMA_DEPT" item-value="KD_DEPT" label="Program Studi" chips multiple :loading="loading" :eager="true" outlined></v-select>
+
+                            <input type="hidden" v-model="kelasEdit">
+
+                            <v-text-field label="<?= lang('App.nama') ?> *" v-model="namaEdit" :rules="textRules" outlined>
+                            </v-text-field>
+
+                            <v-text-field label="<?= lang('App.email') ?> *" v-model="emailEdit" :rules="emailRules" outlined disabled>
+                            </v-text-field>
+                        </v-container>
+                    </v-card-text>
+                </v-form>
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="purple" dark @click="saveDaftar" :loading="loading">
+                        <?= lang('App.save') ?>
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-row>
+</template> 
 
 <?php $this->endSection("content") ?>
 
@@ -260,7 +311,7 @@
         this.getDataDaftar();
     }
     var mountedVue = function() {
-
+       
     }
     var watchVue = {
         select_daftar: function() {
@@ -286,16 +337,36 @@
                 this.snackbarType = "error";
                 this.snackbarMessage = "you can only select 3";
             }
-        }
+        },
+        select_daftarEdit: function() {
+            this.getJenismhsEdit();
+        },
+        select_jenismhsEdit: function() {
+            this.getProdiEdit();
+            this.select_prodi = [];
+            if (this.select_jenismhsEdit == '4') {
+                this.kelasEdit = 'Sore';
+            } else if (this.select_jenismhsEdit == '3') {
+                this.kelasEdit = 'Transfer';
+            } else {
+                this.kelasEdit = 'Pagi';
+            }
+        },
+        select_prodiEdit: function() {
+            if (this.select_prodiEdit.length > 3) {
+                this.select_prodiEdit.pop();
+                this.snackbar = true;
+                this.snackbarType = "error";
+                this.snackbarMessage = "you can only select 3";
+            }
+        },
     }
     dataVue = {
         ...dataVue,
         modalDaftar: false,
-        gelombang: "<?= $gelombang ?>",
+        modalEditDaftar: false,
         data_daftar: [],
-        select_daftar: null,
-        select_jenismhs: null,
-        select_prodi: [],
+        gelombang: "<?= $gelombang ?>",
         list_jenisdaftar: [{
                 text: 'REGULER',
                 value: 'Hanya Daftar'
@@ -307,19 +378,26 @@
         ],
         list_jenismhs: [],
         list_prodi: [],
+        select_daftar: null,
+        select_jenismhs: null,
+        select_prodi: [],
         kelas: "",
         nama: "",
-        email: "",
+        email: "<?= session()->get('email') ?>",
         no_kipk: "",
+        nodaf: "",
+        list_jenismhsEdit: [],
+        list_prodiEdit: [],
+        namaEdit: "",
+        emailEdit: "",
+        nokipkEdit: "",
+        select_daftarEdit: "",
+        select_jenismhsEdit: "",
+        select_prodiEdit:[],
+        kelasEdit: "",
     }
     methodsVue = {
         ...methodsVue,
-        reset() {
-            this.$refs.form.reset();
-        },
-        resetValidation() {
-            this.$refs.form.resetValidation();
-        },
         modalDaftarOpen: function() {
             this.modalDaftar = true;
             this.notifType = '';
@@ -327,11 +405,11 @@
         modalDaftarClose: function() {
             this.modalDaftar = false;
             this.select_daftar = null,
-                this.select_jenismhs = null,
-                this.select_prodi = [],
-                this.list_jenismhs = [],
-                this.list_prodi = [],
-                this.resetValidation();
+            this.select_jenismhs = null,
+            this.select_prodi = [],
+            this.list_jenismhs = [],
+            this.list_prodi = [],
+            this.resetValidation();
             this.reset();
         },
         getDataDaftar: function() {
@@ -362,6 +440,20 @@
                     console.log(err.response);
                 })
         },
+        getJenismhsEdit: function() {
+            this.loading = true;
+            axios.get(`/api/jenismhs/get?daftar=${this.select_daftarEdit}`)
+                .then(res => {
+                    // handle success
+                    var data = res.data;
+                    this.list_jenismhsEdit = data.data;
+                    this.loading = false;
+                })
+                .catch(err => {
+                    // handle error
+                    console.log(err.response);
+                })
+        },
         getProdi: function() {
             this.loading = true;
             axios.get(`/api/programstudi/get?daftar=${this.select_daftar}&jenis=${this.select_jenismhs}`)
@@ -369,6 +461,20 @@
                     // handle success
                     var data = res.data;
                     this.list_prodi = data.data;
+                    this.loading = false;
+                })
+                .catch(err => {
+                    // handle error
+                    console.log(err.response);
+                })
+        },
+        getProdiEdit: function() {
+            this.loading = true;
+            axios.get(`/api/programstudi/get?daftar=${this.select_daftarEdi}&jenis=${this.select_jenismhsEdit}`)
+                .then(res => {
+                    // handle success
+                    var data = res.data;
+                    this.list_prodiEdit = data.data;
                     this.loading = false;
                 })
                 .catch(err => {
@@ -419,6 +525,23 @@
                     console.log(err.response);
                     this.loading = false
                 })
+        },
+        editDaftar: function(data) {
+            this.modalEditDaftar = true;
+            this.show = false;
+            this.notifType = "";
+            this.nodaf = data.nodaf;
+            this.select_daftarEdit = data.status_registrasi;
+            this.select_jenismhsEdit = data.ID_JENISMHS;
+            this.select_prodiEdit = [data.pilihan1,data.pilihan2,data.pilihan3];
+            this.namaEdit = data.nama;
+            this.emailEdit = data.email;
+            this.nokipkEdit = data.no_kipk;
+            this.kelasEdit = data.KELAS;
+        },
+        editDaftarClose: function() {
+            this.modalEditDaftar = false;
+            this.$refs.form.resetValidation();
         },
     }
 </script>
