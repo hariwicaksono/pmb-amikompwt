@@ -20,7 +20,8 @@ return [
     "failedUploadImg" => "Gagal unggah gambar",
     "failedPassword" => "Gagal mengganti password",
 
-    "dataDiri" => "Data Diri",
+    "personalData" => "Data Diri",
+    "welcomeReg" => "Selamat Datang. Silahkan lakukan Pendaftaran",
 
     "forgotPass" => "Lupa Password",
     "save" => "Simpan",

@@ -35,7 +35,7 @@ class Calonsiswa extends BaseControllerApi
         } else {
             $response = [
                 'status' => false,
-                'message' => lang('App.noData'),
+                'message' => lang('App.welcomeReg'),
                 'data' => []
             ];
             return $this->respond($response, 200);

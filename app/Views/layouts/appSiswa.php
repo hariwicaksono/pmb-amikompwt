@@ -45,8 +45,10 @@
                 <?php if (!empty(session()->get('username'))) : ?>
                     <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="yellow darken-3" icon x-large v-bind="attrs" v-on="on">
-                                <v-icon>mdi-account-circle</v-icon>
+                            <v-btn icon x-large v-bind="attrs" v-on="on">
+                                <v-avatar color="yellow darken-3" size="36">
+                                    <span class="white--text text-h6"><?= substr(session()->get('username'), 0, 1); ?></span>
+                                </v-avatar>
                             </v-btn>
                         </template>
 
@@ -83,9 +85,11 @@
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
-                <v-list-item class="px-2" @click="">
+                <v-list-item class="px-2">
                     <v-list-item-avatar>
-                        <v-icon color="yellow darken-2" large>mdi-account-outline</v-icon>
+                        <v-avatar color="yellow darken-3" size="36">
+                            <span class="white--text text-h6"><?= substr(session()->get('username'), 0, 1); ?></span>
+                        </v-avatar>
                     </v-list-item-avatar>
                     <v-list-item-content class="text-truncate">
                         <?= session()->get('username') ?>
@@ -152,8 +156,8 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>-->
 
-            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:20px;">
-                <span v-if="snackbar">{{snackbarMessage}}</span>
+            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:20px;" text>
+                <span class="font-weight-medium" v-if="snackbar">{{snackbarMessage}}</span>
                 <template v-slot:action="{ attrs }">
                     <v-btn text v-bind="attrs" @click="snackbar = false">
                         <v-icon>mdi-close</v-icon>
@@ -245,7 +249,7 @@
             notifMessage: '',
             notifType: '',
             snackbar: false,
-            timeout: 4000,
+            timeout: 5000,
             snackbarType: '',
             snackbarMessage: '',
             show: false,

@@ -19,7 +19,8 @@ return [
     "failedDelete" => "Failed to delete data",
     "failedUploadImg" => "Failed to upload image",
 
-    "dataDiri" => "Personal Data",
+    "personalData" => "Personal Data",
+    "welcomeReg" => "Welcome. Please Register first",
 
     "forgotPass" => "Forgot Password",
     "save" => "Save",

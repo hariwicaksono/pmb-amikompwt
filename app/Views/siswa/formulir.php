@@ -8,10 +8,10 @@
         <v-card-title>
             <v-icon color="purple" class="mr-1">mdi-file-document-edit</v-icon> Pendaftaran
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-2" class="white--text" @click="modalDaftarOpen" v-if="!data_daftar.nodaf">
-                <v-icon>mdi-file-document-edit</v-icon>
+            <v-btn color="yellow darken-3" @click="modalDaftarOpen" v-if="!data_daftar.nodaf">
+                DAFTAR
             </v-btn>
-            <v-btn color="orange darken-2" class="white--text" @click="editDaftar(data_daftar)" v-else>
+            <v-btn color="yellow darken-3" @click="editDaftar(data_daftar)" v-else>
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -29,11 +29,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ data_daftar.email ? data_daftar.email:'—'}}</td>
+                            <td>{{email}}</td>
                             <td>
                                 <span v-if="data_daftar.nodaf">{{ data_daftar.nodaf }}</span>
                                 <span v-else>
-                                    <v-chip color="warning" dark small>
+                                    <v-chip color="error" dark small>
                                         <v-icon left small>mdi-alert</v-icon>Daftar Dahulu
                                     </v-chip>
                                 </span>
@@ -54,7 +54,7 @@
         <v-card-title>
             <?= lang('App.dataDiri') ?>
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-2" dark>
+            <v-btn color="yellow darken-3" class="white--text">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -98,7 +98,7 @@
         <v-card-title>
             Data Sekolah
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-3" dark>
+            <v-btn color="yellow darken-3" class="white--text">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -132,7 +132,7 @@
         <v-card-title>
             Data Ibu Kandung
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-3" dark>
+            <v-btn color="yellow darken-3" class="white--text">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -166,7 +166,7 @@
         <v-card-title>
             Data Ayah
             <v-spacer></v-spacer>
-            <v-btn color="orange darken-3" dark>
+            <v-btn color="yellow darken-3" class="white--text">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -199,7 +199,7 @@
     <v-icon>mdi-content-save</v-icon>&nbsp; Simpan &amp; Selesai
 </v-btn>
 
-<!-- Modal Save -->
+<!-- Modal Save Daftar -->
 <template>
     <v-row justify="center">
         <v-dialog v-model="modalDaftar" width="600" persistent>
@@ -382,7 +382,7 @@
         select_jenismhs: null,
         select_prodi: [],
         kelas: "",
-        nama: "",
+        nama: "<?= session()->get('nama') ?>",
         email: "<?= session()->get('email') ?>",
         no_kipk: "",
         nodaf: "",
@@ -409,8 +409,8 @@
             this.select_prodi = [],
             this.list_jenismhs = [],
             this.list_prodi = [],
-            this.resetValidation();
-            this.reset();
+            this.$refs.form.resetValidation();
+            this.$refs.form.reset();
         },
         getDataDaftar: function() {
             this.loading = true;
@@ -418,8 +418,18 @@
                 .then(res => {
                     // handle success
                     var data = res.data;
-                    this.data_daftar = data.data;
-                    this.loading = false;
+                    if (data.status == true) {
+                        this.data_daftar = data.data;
+                        this.loading = false;
+                        this.snackbar = true;
+                        this.snackbarType = "success";
+                        this.snackbarMessage = data.message;
+                    } else {
+                        this.loading = false;
+                        this.snackbar = true;
+                        this.snackbarType = "warning";
+                        this.snackbarMessage = data.message;
+                    }
                 })
                 .catch(err => {
                     // handle error
