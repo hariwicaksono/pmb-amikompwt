@@ -1,17 +1,19 @@
 <?php $this->extend("layouts/appSiswa"); ?>
 <?php $this->section("content"); ?>
 
-<h1 class="text-h4 font-weight-bold mb-3">Formulir Pendaftaran Tahun Ajaran <?= $tha_pmb ?></h1>
+<h1 class="text-h5 font-weight-bold mb-3">Formulir Pendaftaran Tahun Ajaran <?= $tha_pmb ?></h1>
 
 <div class="mb-4">
     <v-card>
         <v-card-title>
-            <v-icon color="purple" class="mr-1">mdi-file-document-edit</v-icon> Pendaftaran
+            <v-fab-transition>
+                <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab @click="modalDaftarOpen" v-show="!data_daftar.nodaf" elevation="2">
+                    <v-icon large>mdi-plus</v-icon>
+                </v-btn>
+            </v-fab-transition>
+            Pendaftaran
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-3" @click="modalDaftarOpen" v-if="!data_daftar.nodaf">
-                DAFTAR
-            </v-btn>
-            <v-btn color="yellow darken-3" @click="editDaftar(data_daftar)" v-else>
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3" @click="editDaftar(data_daftar)" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -54,7 +56,7 @@
         <v-card-title>
             <?= lang('App.dataDiri') ?>
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-3" class="white--text">
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -98,7 +100,7 @@
         <v-card-title>
             Data Sekolah
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-3" class="white--text">
+            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -132,7 +134,7 @@
         <v-card-title>
             Data Ibu Kandung
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-3" class="white--text">
+            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -166,7 +168,7 @@
         <v-card-title>
             Data Ayah
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-3" class="white--text">
+            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -220,7 +222,7 @@
 
                             <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
 
-                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="numberRules"  v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
+                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="numberRules" v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
 
                             <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" outlined></v-select>
 
@@ -267,10 +269,10 @@
                     <v-card-text>
                         <v-container :fluid="true">
                             <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-                            
+
                             <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
 
-                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="numberRules"  v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
+                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="numberRules" v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
 
                             <v-select v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" outlined></v-select>
 
@@ -311,7 +313,7 @@
         this.getDataDaftar();
     }
     var mountedVue = function() {
-       
+
     }
     var watchVue = {
         select_daftar: function() {
@@ -393,7 +395,7 @@
         nokipkEdit: "",
         select_daftarEdit: "",
         select_jenismhsEdit: "",
-        select_prodiEdit:[],
+        select_prodiEdit: [],
         kelasEdit: "",
     }
     methodsVue = {
@@ -410,7 +412,7 @@
             this.list_jenismhs = [],
             this.list_prodi = [],
             this.$refs.form.resetValidation();
-            this.$refs.form.reset();
+            //this.$refs.form.reset();
         },
         getDataDaftar: function() {
             this.loading = true;
@@ -543,7 +545,7 @@
             this.nodaf = data.nodaf;
             this.select_daftarEdit = data.status_registrasi;
             this.select_jenismhsEdit = data.ID_JENISMHS;
-            this.select_prodiEdit = [data.pilihan1,data.pilihan2,data.pilihan3];
+            this.select_prodiEdit = [data.pilihan1, data.pilihan2, data.pilihan3];
             this.namaEdit = data.nama;
             this.emailEdit = data.email;
             this.nokipkEdit = data.no_kipk;
