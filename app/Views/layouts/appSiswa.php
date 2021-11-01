@@ -85,7 +85,7 @@
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
-                <v-list-item class="px-2">
+                <!--<v-list-item class="px-2">
                     <v-list-item-avatar>
                         <v-avatar color="yellow darken-3" size="36">
                             <span class="white--text text-h6"><?= substr(session()->get('username'), 0, 1); ?></span>
@@ -95,7 +95,7 @@
                         <?= session()->get('username') ?>
                     </v-list-item-content>
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider></v-divider>-->
                 <v-list>
                     <v-list-item class="px-2" v-for="(item, i) in navdrawerItems" :key="i" link :href="item.link">
                         <v-list-item-icon>
@@ -156,7 +156,7 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>-->
 
-            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:20px;" text>
+            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:60px;" text>
                 <span class="font-weight-medium" v-if="snackbar">{{snackbarMessage}}</span>
                 <template v-slot:action="{ attrs }">
                     <v-btn text v-bind="attrs" @click="snackbar = false">
@@ -183,6 +183,28 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-speed-dial>-->
+
+            <template>
+                <v-bottom-navigation :value="value" fixed color="teal" grow>
+                    <v-btn>
+                        <span>Recents</span>
+
+                        <v-icon>mdi-history</v-icon>
+                    </v-btn>
+
+                    <v-btn>
+                        <span>Favorites</span>
+
+                        <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+
+                    <v-btn>
+                        <span>Nearby</span>
+
+                        <v-icon>mdi-map-marker</v-icon>
+                    </v-btn>
+                </v-bottom-navigation>
+            </template>
         </v-app>
     </div>
 
@@ -200,13 +222,18 @@
     </script>
     <script>
         var computedVue = {
+            mini: {
+                get() {
+                    return this.$vuetify.breakpoint.smAndDown || !this.toggleMini;
+                },
+                set(value) {
+                    this.toggleMini = value;
+                }
+            },
             isMobile() {
                 if (this.$vuetify.breakpoint.smAndDown) {
                     return this.sidebarMenu = false
                 }
-            },
-            mini() {
-                return (this.$vuetify.breakpoint.smAndDown) || !this.toggleMini
             },
             themeText() {
                 return this.$vuetify.theme.dark ? '<?= lang('App.dark') ?>' : '<?= lang('App.light') ?>'
@@ -244,6 +271,7 @@
             dark: false,
             loading: false,
             valid: true,
+            value: 1,
             textRules: [],
             emailRules: [],
             notifMessage: '',

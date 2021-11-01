@@ -49,6 +49,7 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
     $routes->get('calonsiswa', 'Calonsiswa::index');
     $routes->post('calonsiswa/save', 'Calonsiswa::create');
+    $routes->put('calonsiswa/update/(:segment)', 'Calonsiswa::update/$1');
     $routes->get('jenismhs', 'JenisMhs::index');
     $routes->get('jenismhs/get', 'JenisMhs::getJenismhs');
     $routes->get('programstudi', 'ProgramStudi::index');

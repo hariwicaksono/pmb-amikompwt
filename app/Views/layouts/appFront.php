@@ -249,13 +249,18 @@
 
     <script>
         var computedVue = {
+            mini: {
+                get() {
+                    return this.$vuetify.breakpoint.smAndDown || !this.toggleMini;
+                },
+                set(value) {
+                    this.toggleMini = value;
+                }
+            },
             isMobile() {
                 if (this.$vuetify.breakpoint.smAndDown) {
                     return this.sidebarMenu = false
                 }
-            },
-            mini() {
-                return (this.$vuetify.breakpoint.smAndDown) || !this.toggleMini
             },
             themeText() {
                 return this.$vuetify.theme.dark ? '<?= lang('App.dark') ?>' : '<?= lang('App.light') ?>'

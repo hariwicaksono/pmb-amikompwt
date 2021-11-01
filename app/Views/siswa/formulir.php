@@ -7,15 +7,18 @@
     <v-card>
         <v-card-title>
             <v-fab-transition>
-                <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab @click="modalDaftarOpen" v-show="!data_daftar.nodaf" elevation="2">
+                <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab @click="modalDaftar = true" elevation="2" title="Daftar" v-if="!data_daftar.nodaf">
                     <v-icon large>mdi-plus</v-icon>
+                </v-btn>
+                <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab tile @click="editDaftar(data_daftar)" elevation="2" title="Edit" v-else>
+                    <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>
             </v-fab-transition>
             Pendaftaran
-            <v-spacer></v-spacer>
+            <!--<v-spacer></v-spacer>
             <v-btn color="yellow darken-2" class="grey--text text--darken-3" @click="editDaftar(data_daftar)" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
-            </v-btn>
+            </v-btn>-->
         </v-card-title>
         <v-card-text>
             <v-simple-table>
@@ -31,7 +34,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{email}}</td>
+                            <td>{{data_daftar.email??"—"}}</td>
                             <td>
                                 <span v-if="data_daftar.nodaf">{{ data_daftar.nodaf }}</span>
                                 <span v-else>
@@ -40,9 +43,9 @@
                                     </v-chip>
                                 </span>
                             </td>
-                            <td>{{ data_daftar.tgldaftar ? dateYmdHis(data_daftar.tgldaftar):'—'}}</td>
-                            <td>{{ data_daftar.gelombang ? data_daftar.gelombang:'—'}}</td>
-                            <td>{{ data_daftar.pilihan1 ? data_daftar.pilihan1:'—'}}</td>
+                            <td>{{ dateYmdHis(data_daftar.tgldaftar)??"—"}}</td>
+                            <td>{{ data_daftar.gelombang??"—"}}</td>
+                            <td>{{ data_daftar.pilihan1??"—"}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -56,7 +59,7 @@
         <v-card-title>
             <?= lang('App.dataDiri') ?>
             <v-spacer></v-spacer>
-            <v-btn color="yellow darken-2" class="grey--text text--darken-3">
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -78,15 +81,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-no-wrap">{{ data_daftar.nama ? data_daftar.nama:'—'}}</td>
-                            <td>{{ data_daftar.nikktp ? data_daftar.nikktp:'—'}}</td>
-                            <td>{{ data_daftar.jk ? data_daftar.jk:'—'}}</td>
-                            <td>{{ data_daftar.tempatlahir ? data_daftar.tempatlahir:'—'}}/{{ data_daftar.tgllahir ? dateYmd(data_daftar.tgllahir):'—'}}</td>
-                            <td>{{ data_daftar.AGAMA ? data_daftar.AGAMA:'—'}}</td>
-                            <td>{{ data_daftar.status_pernikahan ? data_daftar.status_pernikahan:'—'}}</td>
-                            <td>{{ data_daftar.telepon ? data_daftar.telepon:'—'}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.alamat ? data_daftar.alamat:'—'}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.deskripsi_alamat ? data_daftar.deskripsi_alamat:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.nama??"—"}}</td>
+                            <td>{{ data_daftar.nikktp??"—"}}</td>
+                            <td>{{ data_daftar.jk??"—"}}</td>
+                            <td>{{ data_daftar.tempatlahir??"—"}}/{{ data_daftar.tgllahir??"—"}}</td>
+                            <td>{{ data_daftar.AGAMA??"—"}}</td>
+                            <td>{{ data_daftar.status_pernikahan??"—"}}</td>
+                            <td>{{ data_daftar.telepon??"—"}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.alamat??"—"}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.deskripsi_alamat??"—"}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -100,7 +103,7 @@
         <v-card-title>
             Data Sekolah
             <v-spacer></v-spacer>
-            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -117,10 +120,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-no-wrap">{{ data_daftar.sekolah ? data_daftar.sekolah:'—'}}</td>
-                            <td>{{ data_daftar.jurusan ? data_daftar.jurusan:'—'}}</td>
-                            <td>{{ data_daftar.nem ? data_daftar.nem:'—'}}</td>
-                            <td>{{ data_daftar.tahun_lulus ? data_daftar.tahun_lulus:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.sekolah??"—"}}</td>
+                            <td>{{ data_daftar.jurusan??"—"}}</td>
+                            <td>{{ data_daftar.nem??"—"}}</td>
+                            <td>{{ data_daftar.tahun_lulus??"—"}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -134,7 +137,7 @@
         <v-card-title>
             Data Ibu Kandung
             <v-spacer></v-spacer>
-            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -151,10 +154,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-no-wrap">{{ data_daftar.NAMA_ORTU ? data_daftar.NAMA_ORTU:'—'}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
-                            <td>{{ data_daftar.PEKERJAAN_ORTU ? data_daftar.PEKERJAAN_ORTU:'—'}}</td>
-                            <td>{{ data_daftar.TELP_ORTU ? data_daftar.TELP_ORTU:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.NAMA_ORTU??"—"}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU??"—"}}</td>
+                            <td>{{ data_daftar.PEKERJAAN_ORTU??"—"}}</td>
+                            <td>{{ data_daftar.TELP_ORTU??"—"}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -168,7 +171,7 @@
         <v-card-title>
             Data Ayah
             <v-spacer></v-spacer>
-            <v-btn color="purple" class="white--text" v-if="data_daftar.nodaf">
+            <v-btn color="yellow darken-2" class="grey--text text--darken-3" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
             </v-btn>
         </v-card-title>
@@ -185,10 +188,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-no-wrap">{{ data_daftar.NAMA_AYAH ? data_daftar.NAMA_AYAH:'—'}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU ? data_daftar.ALAMATORTU:'—'}}</td>
-                            <td>{{ data_daftar.PEKERJAAN_AYAH ? data_daftar.PEKERJAAN_AYAH:'—'}}</td>
-                            <td>{{ data_daftar.TELP_AYAH ? data_daftar.TELP_AYAH:'—'}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.NAMA_AYAH??"—"}}</td>
+                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU??"—"}}</td>
+                            <td>{{ data_daftar.PEKERJAAN_AYAH??"—"}}</td>
+                            <td>{{ data_daftar.TELP_AYAH??"—"}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -210,7 +213,7 @@
                     <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn icon dark @click="modalDaftarClose">
+                        <v-btn icon dark @click="modalDaftar = false">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                     </v-toolbar-items>
@@ -220,13 +223,13 @@
                         <v-container :fluid="true">
                             <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
 
-                            <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
+                            <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" :rules="textRules" outlined></v-select>
 
                             <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="numberRules" v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
 
-                            <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" outlined></v-select>
+                            <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" :rules="textRules" outlined></v-select>
 
-                            <v-select v-model="select_prodi" :items="list_prodi" item-text="NAMA_DEPT" item-value="KD_DEPT" label="Program Studi" chips multiple :loading="loading" :eager="true" outlined></v-select>
+                            <v-select v-model="select_prodi" :items="list_prodi" item-text="NAMA_DEPT" item-value="KD_DEPT" label="Program Studi" chips multiple :loading="loading" :eager="true" :rules="textRules" outlined></v-select>
 
                             <input type="hidden" v-model="kelas">
 
@@ -292,7 +295,7 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="purple" dark @click="saveDaftar" :loading="loading">
+                    <v-btn color="purple" dark :loading="loading">
                         <?= lang('App.save') ?>
                     </v-btn>
                 </v-card-actions>
@@ -363,12 +366,20 @@
             }
         },
     }
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    const options = {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    }
     dataVue = {
         ...dataVue,
         modalDaftar: false,
         modalEditDaftar: false,
         data_daftar: [],
         gelombang: "<?= $gelombang ?>",
+        relasi: 1,
         list_jenisdaftar: [{
                 text: 'REGULER',
                 value: 'Hanya Daftar'
@@ -402,16 +413,16 @@
         ...methodsVue,
         modalDaftarOpen: function() {
             this.modalDaftar = true;
-            this.notifType = '';
+            //this.notifType = '';
         },
         modalDaftarClose: function() {
             this.modalDaftar = false;
-            this.select_daftar = null,
-            this.select_jenismhs = null,
-            this.select_prodi = [],
-            this.list_jenismhs = [],
-            this.list_prodi = [],
-            this.$refs.form.resetValidation();
+            //this.select_daftar = null;
+            //this.select_jenismhs = null;
+            //this.select_prodi = [];
+            //this.list_jenismhs = [];
+            //this.list_prodi = [];
+            //this.$refs.form.resetValidation();
             //this.$refs.form.reset();
         },
         getDataDaftar: function() {
@@ -503,6 +514,16 @@
                     data: {
                         nama: this.nama,
                         email: this.email,
+                        gelombang: this.gelombang,
+                        no_kipk: this.no_kipk,
+                        pilihan1: this.select_prodi[0]??"",
+                        pilihan2: this.select_prodi[1]??"",
+                        pilihan3: this.select_prodi[2]??"",
+                        status_registrasi: this.select_daftar,
+                        kelas: this.kelas,
+                        id_relasi: this.relasi,
+                        jenis_mhs: this.select_jenismhs,
+                        id_jenismhs: this.select_jenismhs,
                     },
                     options
                 })
@@ -517,27 +538,30 @@
                     //setTimeout(() => window.location.href = data.data.url, 1000);
                     //}
                     if (data.status == true) {
+                        this.notifType = '';
                         this.snackbar = true;
                         this.snackbarType = "success";
                         this.snackbarMessage = data.message;
                         this.getDataDaftar();
-                        this.nama = '';
-                        this.email = '';
-                        this.modalAdd = false;
+                        this.modalDaftar = false;
                         this.$refs.form.resetValidation();
                     } else {
                         this.notifType = "error";
                         this.notifMessage = data.message;
-                        this.modalAdd = true;
+                        this.snackbar = true;
+                        this.snackbarType = "error";
+                        this.snackbarMessage = data.message;
+                        this.modalDaftar = true;
                         this.$refs.form.validate();
                     }
                 })
                 .catch(err => {
                     // handle error
                     console.log(err.response);
-                    this.loading = false
+                    this.loading = false;
                 })
         },
+        //Update Daftar
         editDaftar: function(data) {
             this.modalEditDaftar = true;
             this.show = false;
@@ -554,6 +578,44 @@
         editDaftarClose: function() {
             this.modalEditDaftar = false;
             this.$refs.form.resetValidation();
+        },
+        updateDaftar: function() {
+            this.loading = true;
+            axios.put(`/api/product/update/${this.productIdEdit}`, {
+                    product_name: this.productNameEdit,
+                    product_price: this.productPriceEdit,
+                    product_description: this.productDescriptionEdit,
+                    product_image: this.mediaID
+                }, options)
+                .then(res => {
+                    // handle success
+                    this.loading = false;
+                    var data = res.data;
+                    if (data.expired == true) {
+                        this.snackbar = true;
+                        this.snackbarType = "warning";
+                        this.snackbarMessage = data.message;
+                        setTimeout(() => window.location.href = data.data.url, 1000);
+                    }
+                    if (data.status == true) {
+                        this.snackbar = true;
+                        this.snackbarType = "success";
+                        this.snackbarMessage = data.message;
+                        this.getProducts();
+                        this.modalEdit = false;
+                        this.$refs.form.resetValidation();
+                    } else {
+                        this.notifType = "error";
+                        this.notifMessage = data.message;
+                        this.modalEdit = true;
+                        this.$refs.form.validate();
+                    }
+                })
+                .catch(err => {
+                    // handle error
+                    console.log(err.response);
+                    this.loading = false
+                })
         },
     }
 </script>

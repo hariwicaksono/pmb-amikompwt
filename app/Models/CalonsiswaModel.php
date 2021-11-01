@@ -58,11 +58,15 @@ class CalonsiswaModel extends Model
     function genNodaf($ThaPmb, $startnum = '0001')
     {
         $th = substr($ThaPmb, 2, 2);
+       
         $kode = 'OL';
 
         $this->select("max(replace(replace(nodaf,'AO',''),'OL',''))+1 as nodaf");
         $this->where('thn_akademik', $ThaPmb);
-        $hasil = $this->first();
+        $hasil = $this->get()->getRowArray();
+
+        //var_dump($this->getLastQuery()->getQuery());
+        //die;
 
         $nodafe = '';
         if (is_null($hasil['nodaf'])) {
