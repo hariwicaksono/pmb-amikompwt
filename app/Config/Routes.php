@@ -54,6 +54,9 @@ $routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], f
     $routes->get('jenismhs/get', 'JenisMhs::getJenismhs');
     $routes->get('programstudi', 'ProgramStudi::index');
     $routes->get('programstudi/get', 'ProgramStudi::getProdi');
+    $routes->get('kabupaten', 'Kabupaten::index');
+    $routes->get('kabupaten/get', 'Kabupaten::getProvinsi');
+    $routes->get('provinsi', 'Provinsi::index');
 });
 
 $routes->group('calonsiswa', ['filter' => 'auth'], function ($routes) {
