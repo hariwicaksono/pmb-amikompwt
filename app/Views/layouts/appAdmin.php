@@ -216,8 +216,6 @@
             dark: false,
             loading: false,
             valid: true,
-            textRules: [],
-            emailRules: [],
             notifMessage: '',
             notifType: '',
             snackbar: false,
@@ -279,6 +277,16 @@
                     link: 'https://www.instagram.com/amikom_purwokerto/?hl=id',
                 },
             ],
+            rules: {
+                email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid');?>',
+                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len}`,
+                password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+                    '<?= lang('App.strongPassword');?>',
+                min: v => v.length >= 8 || '<?= lang('App.minChar');?>',
+                required: v => !!v || '<?= lang('App.isRequired');?>',
+                number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber');?>",
+                zero:  v => v > 0 || "<?= lang('App.isZero');?>"
+            },
         }
         var methodsVue = {
             toggleTheme() {

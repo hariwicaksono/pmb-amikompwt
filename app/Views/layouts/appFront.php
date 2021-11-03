@@ -175,7 +175,7 @@
                                     <v-form ref="formLogin" v-model="valid">
                                         <v-row>
                                             <v-col cols="12">
-                                                <v-text-field v-model="loginEmail" :rules="emailRules" label="E-mail"></v-text-field>
+                                                <v-text-field v-model="loginEmail" :rules="[rules.email]" label="E-mail"></v-text-field>
                                             </v-col>
                                             <v-col cols="12">
                                                 <v-text-field v-model="loginPassword" :append-icon="show?'mdi-eye':'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show = !show"></v-text-field>
@@ -208,7 +208,7 @@
                                                 <v-text-field v-model="lastName" :rules="[rules.required]" label="Last Name" maxlength="20" required></v-text-field>
                                             </v-col>
                                             <v-col cols="12">
-                                                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                                                <v-text-field v-model="email" :rules="[rules.email]" label="E-mail" required></v-text-field>
                                             </v-col>
                                             <v-col cols="12">
                                                 <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
@@ -380,13 +380,15 @@
             verify: "",
             loginEmail: "",
             loginPassword: "",
-            emailRules: [
-                v => !!v || "Required",
-                v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-            ],
             rules: {
-                required: value => !!value || "Required.",
-                min: v => (v && v.length >= 8) || "Min 8 characters"
+                email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid');?>',
+                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len}`,
+                password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+                    '<?= lang('App.strongPassword');?>',
+                min: v => v.length >= 8 || '<?= lang('App.minChar');?>',
+                required: v => !!v || '<?= lang('App.isRequired');?>',
+                number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber');?>",
+                zero:  v => v > 0 || "<?= lang('App.isZero');?>"
             },
         }
         var methodsVue = {

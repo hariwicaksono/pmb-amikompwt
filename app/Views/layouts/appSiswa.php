@@ -337,18 +337,16 @@
                 },
             ],
             fab: false,
-            textRules: [
-                v => !!v || '<?= lang("App.isRequired") ?>',
-            ],
-            emailRules: [
-                v => !!v || '<?= lang("App.emailRequired") ?>',
-                v => /.+@.+/.test(v) || '<?= lang("App.emailValid") ?>',
-            ],
-            numberRules: [
-                v => !!v || '<?= lang("App.isRequired") ?>',
-                v => Number.isInteger(Number(v)) || "The value must be an integer number",
-                v => v > 0 || "The value must be greater than zero"
-            ],
+            rules: {
+                email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid');?>',
+                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len}`,
+                password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+                    '<?= lang('App.strongPassword');?>',
+                min: v => v.length >= 8 || '<?= lang('App.minChar');?>',
+                required: v => !!v || '<?= lang('App.isRequired');?>',
+                number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber');?>",
+                zero:  v => v > 0 || "<?= lang('App.isZero');?>"
+            },
         }
         var methodsVue = {
             toggleTheme() {

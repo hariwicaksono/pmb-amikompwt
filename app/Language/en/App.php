@@ -24,4 +24,12 @@ return [
 
     "forgotPass" => "Forgot Password",
     "save" => "Save",
+
+    'emailValid' => 'Please enter a valid email address',
+    'invalidLength' => 'Invalid character length, required',
+    'strongPassword' => 'Password must contain an upper case letter, a numeric character, and a special character',
+    'minChar' => 'At least 8 characters',
+    'isRequired' => 'Field is required',
+    'isNumber' => 'The value must be a number',
+    'isZero' => 'The value must be greater than zero',
 ];

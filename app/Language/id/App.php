@@ -25,4 +25,12 @@ return [
 
     "forgotPass" => "Lupa Password",
     "save" => "Simpan",
+
+    'emailValid' => 'Silakan isi alamat email yang valid',
+    'invalidLength' => 'Panjang karakter tidak valid, wajib diisi',
+    'strongPassword' => 'Kata sandi harus berisi huruf besar, karakter numerik, dan karakter khusus',
+    'minChar' => 'Minimal 8 karakter Huruf dan Angka',
+    'isRequired' => 'Field Wajib diisi',
+    'isNumber' => 'Nilainya harus berupa angka',
+    'isZero' => 'Nilainya harus lebih besar dari nol',
 ];
