@@ -339,13 +339,13 @@
             fab: false,
             rules: {
                 email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid');?>',
-                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len}`,
+                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len} digit`,
                 password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
                     '<?= lang('App.strongPassword');?>',
                 min: v => v.length >= 8 || '<?= lang('App.minChar');?>',
                 required: v => !!v || '<?= lang('App.isRequired');?>',
                 number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber');?>",
-                zero:  v => v > 0 || "<?= lang('App.isZero');?>"
+                zero:  v => v > 0 || "<?= lang('App.isZero');?>",
             },
         }
         var methodsVue = {

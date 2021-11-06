@@ -55,35 +55,6 @@
                     <h4>Jurusan:</h4>{{ data_daftar.pilihan1??"—"}} / {{ data_daftar.pilihan2??"—"}} / {{ data_daftar.pilihan3??"—"}}
                 </v-col>
             </v-row>
-            <!--<v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>NODAF</th>
-                            <th>Tanggal Daftar</th>
-                            <th>Jalur/Gelombang</th>
-                            <th>Jurusan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{data_daftar.email??"—"}}</td>
-                            <td>
-                                <span v-if="data_daftar.nodaf">{{ data_daftar.nodaf }}</span>
-                                <span v-else>
-                                    <v-chip color="error" dark small>
-                                        <v-icon left small>mdi-alert</v-icon>Daftar Dahulu
-                                    </v-chip>
-                                </span>
-                            </td>
-                            <td>{{ dateYmdHis(data_daftar.tgldaftar)??"—"}}</td>
-                            <td>{{ data_daftar.gelombang??"—"}}</td>
-                            <td>{{ data_daftar.pilihan1??"—"}}</td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>-->
         </v-card-text>
     </v-card>
 </div>
@@ -122,36 +93,6 @@
                     <h4>Status Pernikahan:</h4>{{ data_daftar.status_pernikahan??"—"}}
                 </v-col>
             </v-row>
-            <!--<v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>NIK</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Tempat/Tgl Lahir</th>
-                            <th>Agama</th>
-                            <th>Status Pernikahan</th>
-                            <th>No HP/WA</th>
-                            <th>Alamat Lengkap</th>
-                            <th>Deskripsi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-no-wrap">{{ data_daftar.nama??"—"}}</td>
-                            <td>{{ data_daftar.nikktp??"—"}}</td>
-                            <td>{{ data_daftar.jk??"—"}}</td>
-                            <td>{{ data_daftar.tempatlahir??"—"}}/{{ data_daftar.tgllahir??"—"}}</td>
-                            <td>{{ data_daftar.AGAMA??"—"}}</td>
-                            <td>{{ data_daftar.status_pernikahan??"—"}}</td>
-                            <td>{{ data_daftar.telepon??"—"}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.alamat??"—"}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.deskripsi_alamat??"—"}}</td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>-->
         </v-card-text>
     </v-card>
 </div>
@@ -230,26 +171,6 @@
                     <h4>Tahun Lulus:</h4>{{ data_daftar.tahun_lulus??"—"}}
                 </v-col>
             </v-row>
-            <!--<v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Sekolah</th>
-                            <th>Jurusan</th>
-                            <th>RAPOR/NEM/UAN</th>
-                            <th>Tahun Lulus</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-no-wrap">{{ data_daftar.sekolah??"—"}}</td>
-                            <td>{{ data_daftar.jurusan??"—"}}</td>
-                            <td>{{ data_daftar.nem??"—"}}</td>
-                            <td>{{ data_daftar.tahun_lulus??"—"}}</td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>-->
         </v-card-text>
     </v-card>
 </div>
@@ -280,26 +201,6 @@
                     <h4>No Telepon:</h4>{{ data_daftar.TELP_ORTU??"—"}}
                 </v-col>
             </v-row>
-            <!--<v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Ibu Kandung</th>
-                            <th>Alamat</th>
-                            <th>Pekerjaan</th>
-                            <th>No Telepon</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-no-wrap">{{ data_daftar.NAMA_ORTU??"—"}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU??"—"}}</td>
-                            <td>{{ data_daftar.PEKERJAAN_ORTU??"—"}}</td>
-                            <td>{{ data_daftar.TELP_ORTU??"—"}}</td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>-->
         </v-card-text>
     </v-card>
 </div>
@@ -330,26 +231,6 @@
                     <h4>No Telepon:</h4>{{ data_daftar.TELP_AYAH??"—"}}
                 </v-col>
             </v-row>
-            <!--<v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Nama Ayah</th>
-                            <th>Alamat</th>
-                            <th>Pekerjaan</th>
-                            <th>No Telepon</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-no-wrap">{{ data_daftar.NAMA_AYAH??"—"}}</td>
-                            <td class="text-no-wrap">{{ data_daftar.ALAMATORTU??"—"}}</td>
-                            <td>{{ data_daftar.PEKERJAAN_AYAH??"—"}}</td>
-                            <td>{{ data_daftar.TELP_AYAH??"—"}}</td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>-->
         </v-card-text>
     </v-card>
 </div>
@@ -361,7 +242,7 @@
 <!-- Modal Save Daftar -->
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalDaftar" width="600" persistent>
+        <v-dialog v-model="modalDaftar" width="900" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
@@ -372,31 +253,21 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-
-                            <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" :rules="[rules.required]" outlined></v-select>
-
-                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="[rules.number]" v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
-
-                            <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
-
-                            <v-select v-model="select_prodi" :items="list_prodi" item-text="NAMA_DEPT" item-value="KD_DEPT" label="Program Studi" chips multiple :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
-
-                            <input type="hidden" v-model="kelas">
-
-                            <v-text-field label="<?= lang('App.nama') ?> *" v-model="nama" :rules="[rules.required]" outlined>
-                            </v-text-field>
-
-                            <v-text-field label="<?= lang('App.email') ?> *" v-model="email" :rules="[rules.email]" outlined disabled>
-                            </v-text-field>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-select v-model="select_daftar" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="no_kipk" :rules="[rules.number]" v-if="select_daftar == 'KIP-Kuliah'" outlined></v-text-field>
+                        <v-select v-model="select_jenismhs" :items="list_jenismhs" item-text="NAMA" item-value="ID_JENISMHS" label="Jenis Mahasiswa" :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-select v-model="select_prodi" :items="list_prodi" item-text="NAMA_DEPT" item-value="KD_DEPT" label="Program Studi" chips multiple :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <input type="hidden" v-model="kelas">
+                        <v-text-field label="<?= lang('App.nama') ?> *" v-model="nama" :rules="[rules.required]" outlined>
+                        </v-text-field>
+                        <v-text-field label="<?= lang('App.email') ?> *" v-model="email" :rules="[rules.email]" outlined disabled>
+                        </v-text-field>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark @click="saveDaftar" :loading="loading">
@@ -411,9 +282,9 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditDaftar" width="600" persistent>
+        <v-dialog v-model="modalEditDaftar" width="900" persistent scrollable>
             <v-card>
-                <v-toolbar dark color="purple">
+                <v-toolbar color="purple" dark>
                     <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
@@ -422,29 +293,20 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-
-                            <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
-
-                            <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="[rules.number]" v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
-
-                            <v-select label="Jenis Mahasiswa" v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" :loading="loading" :eager="true" outlined></v-select>
-
-                            <v-select label="Program Studi" v-model="select_prodiEdit" :items="list_prodiEdit" item-text="NAMA_DEPT" item-value="KD_DEPT" chips multiple :loading="loading" :eager="true" outlined></v-select>
-
-                            <v-text-field label="<?= lang('App.nama') ?> *" v-model="namaEdit" :rules="[rules.required]" outlined>
-                            </v-text-field>
-
-                            <v-text-field label="<?= lang('App.email') ?> *" v-model="emailEdit" :rules="[rules.email]" outlined disabled>
-                            </v-text-field>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
+                        <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="[rules.number]" v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
+                        <v-select label="Jenis Mahasiswa" v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" :loading="loading" :eager="true" outlined></v-select>
+                        <v-select label="Program Studi" v-model="select_prodiEdit" :items="list_prodiEdit" item-text="NAMA_DEPT" item-value="KD_DEPT" chips multiple :loading="loading" :eager="true" outlined></v-select>
+                        <v-text-field label="<?= lang('App.nama') ?> *" v-model="namaEdit" :rules="[rules.required]" outlined>
+                        </v-text-field>
+                        <v-text-field label="<?= lang('App.email') ?> *" v-model="emailEdit" :rules="[rules.email]" outlined disabled>
+                        </v-text-field>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -458,7 +320,7 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditDatadiri" width="600" persistent>
+        <v-dialog v-model="modalEditDatadiri" width="900" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.Pendaftaran') ?></v-toolbar-title>
@@ -469,42 +331,32 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-
-                            <v-text-field label="<?= lang('App.NIK') ?> *" v-model="nikEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-text-field label="<?= lang('App.tempatLahir') ?> *" v-model="tplahirEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-menu ref="datepicker" v-model="datepicker" :close-on-content-click="false" :return-value.sync="tglahirEdit" transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="tglahirEdit" label="Tanggal Lahir" append-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" :rules="[rules.required]" outlined></v-text-field>
-                                </template>
-                                <v-date-picker v-model="tglahirEdit" color="primary" class="mt-n5" no-title scrollable>
-                                    <v-spacer></v-spacer>
-                                    <v-btn text color="primary" @click="datepicker = false">
-                                        Cancel
-                                    </v-btn>
-                                    <v-btn text color="primary" @click="$refs.datepicker.save(tglahirEdit)">
-                                        OK
-                                    </v-btn>
-                                </v-date-picker>
-                            </v-menu>
-
-                            <v-select label="Jenis Kelamin *" v-model="select_jenkelEdit" :items="list_jenkel" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
-
-                            <v-text-field label="<?= lang('App.telepon') ?> *" v-model="teleponEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-select label="Agama *" v-model="select_agamaEdit" :items="list_agama" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
-
-                            <v-select label="Status Pernikahan *" v-model="select_statusEdit" :items="list_status" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-text-field label="<?= lang('App.NIK') ?> *" v-model="nikEdit" :rules="[rules.number, rules.required, rules.length(16)]" outlined></v-text-field>
+                        <v-text-field label="<?= lang('App.tempatLahir') ?> *" v-model="tplahirEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-menu ref="datepicker" v-model="datepicker" :close-on-content-click="false" :return-value.sync="tglahirEdit" transition="scale-transition" min-width="auto">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-text-field v-model="tglahirEdit" label="Tanggal Lahir" append-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" :rules="[rules.required]" outlined></v-text-field>
+                            </template>
+                            <v-date-picker v-model="tglahirEdit" color="primary" class="pt-n5" no-title scrollable>
+                                <v-spacer></v-spacer>
+                                <v-btn text color="primary" @click="datepicker = false">
+                                    Cancel
+                                </v-btn>
+                                <v-btn text color="primary" @click="$refs.datepicker.save(tglahirEdit)">
+                                    OK
+                                </v-btn>
+                            </v-date-picker>
+                        </v-menu>
+                        <v-select label="Jenis Kelamin *" v-model="select_jenkelEdit" :items="list_jenkel" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
+                        <v-text-field label="<?= lang('App.telepon') ?> *" v-model="teleponEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                        <v-select label="Agama *" v-model="select_agamaEdit" :items="list_agama" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
+                        <v-select label="Status Pernikahan *" v-model="select_statusEdit" :items="list_status" item-text="text" item-value="value" :rules="[rules.required]" :eager="true" outlined></v-select>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -518,7 +370,7 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditAlamat" width="600" persistent>
+        <v-dialog v-model="modalEditAlamat" width="900" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.dataAlamat') ?></v-toolbar-title>
@@ -529,39 +381,27 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-
-                            <v-textarea label="<?= lang('App.alamat') ?> *" v-model="alamatEdit" :rules="[rules.required]" :rules="[rules.length(220)]" counter outlined></v-textarea>
-
-                            <v-row>
-                                <v-col>
-                                    <v-text-field label="<?= lang('App.rt') ?> *" v-model="rtEdit" :rules="[rules.required]" outlined></v-text-field>
-                                </v-col>
-                                <v-col>
-                                    <v-text-field label="<?= lang('App.rw') ?> *" v-model="rwEdit" :rules="[rules.required]" outlined></v-text-field>
-                                </v-col>
-                            </v-row>
-
-                            <v-text-field label="<?= lang('App.kelurahan') ?> *" v-model="kelurahanEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-text-field label="<?= lang('App.kecamatan') ?> *" v-model="kecamatanEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-select label="<?= lang('App.pilihProvinsi') ?> *" v-model="select_provinsiEdit" :items="list_provinsi" item-text="provinsi" item-value="id_provinsi" :eager="true" outlined></v-select>
-
-                            <v-select label="<?= lang('App.pilihKabupaten') ?> *" v-model="select_kabupatenEdit" :items="list_kabupaten" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" outlined></v-select>
-
-                            <v-text-field label="<?= lang('App.kodepos') ?> *" v-model="kodeposEdit" :rules="[rules.required]" outlined></v-text-field>
-
-                            <v-textarea label="<?= lang('App.deskripsiAlamat') ?> *" v-model="deskalamatEdit" :rules="[rules.length(220)]" counter outlined></v-textarea>
-
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-textarea label="<?= lang('App.alamat') ?> *" v-model="alamatEdit" :rules="[rules.required]" :rules="[rules.length(220)]" counter outlined></v-textarea>
+                        <v-row>
+                            <v-col>
+                                <v-text-field label="<?= lang('App.rt') ?> *" v-model="rtEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                            </v-col>
+                            <v-col>
+                                <v-text-field label="<?= lang('App.rw') ?> *" v-model="rwEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-text-field label="<?= lang('App.kelurahan') ?> *" v-model="kelurahanEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-text-field label="<?= lang('App.kecamatan') ?> *" v-model="kecamatanEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-select label="<?= lang('App.pilihProvinsi') ?> *" v-model="select_provinsiEdit" :items="list_provinsi" item-text="provinsi" item-value="id_provinsi" :eager="true" outlined></v-select>
+                        <v-select label="<?= lang('App.pilihKabupaten') ?> *" v-model="select_kabupatenEdit" :items="list_kabupaten" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" outlined></v-select>
+                        <v-text-field label="<?= lang('App.kodepos') ?> *" v-model="kodeposEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                        <v-textarea label="<?= lang('App.deskripsiAlamat') ?> *" v-model="deskalamatEdit" :rules="[rules.length(220)]" counter outlined></v-textarea>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -575,7 +415,7 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditSekolah" width="600" persistent>
+        <v-dialog v-model="modalEditSekolah" width="600" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.dataSekolah') ?></v-toolbar-title>
@@ -586,19 +426,16 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-                            <v-text-field label="<?= lang('App.sekolah') ?> *" v-model="sekolahEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-select label="<?= lang('App.jurusansekolah') ?> *" v-model="select_jursekolahEdit" :items="list_sekolah" item-text="text" item-value="value" :eager="true" outlined></v-select>
-                            <v-text-field label="<?= lang('App.nem') ?> *" v-model="nemEdit" :rules="[rules.required, rules.number]" outlined></v-text-field>
-                            <v-text-field label="<?= lang('App.tahunLulus') ?> *" v-model="thlulusEdit" outlined></v-text-field>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-text-field label="<?= lang('App.sekolah') ?> *" v-model="sekolahEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-select label="<?= lang('App.jurusansekolah') ?> *" v-model="select_jursekolahEdit" :items="list_sekolah" item-text="text" item-value="value" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-text-field label="<?= lang('App.nem') ?> *" v-model="nemEdit" :rules="[rules.required, rules.number]" outlined></v-text-field>
+                        <v-text-field label="<?= lang('App.tahunLulus') ?> *" v-model="thlulusEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -612,7 +449,7 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditIbu" width="600" persistent>
+        <v-dialog v-model="modalEditIbu" width="900" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.dataIbu') ?></v-toolbar-title>
@@ -623,16 +460,15 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-                            <v-text-field label="<?= lang('App.ibu') ?> *" v-model="ibuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-select label="<?= lang('App.pilihPekerjaan') ?> *" v-model="select_kerjaibuEdit" :items="list_pekerjaan" item-text="text" item-value="value" :eager="true" outlined></v-select>
-                            <v-text-field label="<?= lang('App.teleponIbu') ?> *" v-model="telpibuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <label>Alamat Orang Tua</label>
-                            <v-checkbox v-model="checkAlamat" label="Samakan Alamat Orang Tua dengan Alamat Siswa"></v-checkbox>
-                            <template v-if="checkAlamat == false">
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-text-field label="<?= lang('App.ibu') ?> *" v-model="ibuEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-select label="<?= lang('App.pilihPekerjaan') ?> *" v-model="select_kerjaibuEdit" :items="list_pekerjaan" item-text="text" item-value="value" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-text-field label="<?= lang('App.teleponIbu') ?> *" v-model="telpibuEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
+                        <label>Alamat Orang Tua</label>
+                        <v-checkbox v-model="checkAlamat" label="Samakan Alamat Orang Tua dengan Alamat Siswa"></v-checkbox>
+                        <template v-if="checkAlamat == false">
                             <v-textarea label="<?= lang('App.alamatOrtu') ?> *" v-model="alamatOrtuEdit" :rules="[rules.required]" :rules="[rules.length(220)]" counter outlined></v-textarea>
                             <v-row>
                                 <v-col>
@@ -644,15 +480,13 @@
                             </v-row>
                             <v-text-field label="<?= lang('App.kelurahanOrtu') ?> *" v-model="kelurahanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
                             <v-text-field label="<?= lang('App.kecamatanOrtu') ?> *" v-model="kecamatanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-select label="<?= lang('App.pilihProvinsiOrtu') ?> *" v-model="select_provinsiOrtuEdit" :items="list_provinsiOrtu" item-text="provinsi" item-value="id_provinsi" :eager="true" outlined></v-select>
-                            <v-select label="<?= lang('App.pilihKabupatenOrtu') ?> *" v-model="select_kabupatenOrtuEdit" :items="list_kabupatenOrtu" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" outlined></v-select>
+                            <v-select label="<?= lang('App.pilihProvinsiOrtu') ?> *" v-model="select_provinsiOrtuEdit" :items="list_provinsiOrtu" item-text="provinsi" item-value="id_provinsi" :eager="true" :rules="[rules.required]" outlined></v-select>
+                            <v-select label="<?= lang('App.pilihKabupatenOrtu') ?> *" v-model="select_kabupatenOrtuEdit" :items="list_kabupatenOrtu" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" :rules="[rules.required]" outlined></v-select>
                             <v-text-field label="<?= lang('App.kodeposOrtu') ?> *" v-model="kodeposOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            </template>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                        </template>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -666,7 +500,7 @@
 
 <template>
     <v-row justify="center">
-        <v-dialog v-model="modalEditAyah" width="600" persistent>
+        <v-dialog v-model="modalEditAyah" width="900" persistent scrollable>
             <v-card>
                 <v-toolbar dark color="purple">
                     <v-toolbar-title><?= lang('App.dataAyah') ?></v-toolbar-title>
@@ -677,19 +511,16 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
-                <v-form ref="form" v-model="valid">
-                    <v-card-text>
-                        <v-container :fluid="true">
-                            <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-                            <v-text-field label="<?= lang('App.namaAyah') ?> *" v-model="ayahEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-select label="<?= lang('App.pilihPekerjaan') ?> *" v-model="select_kerjaayahEdit" :items="list_pekerjaan" item-text="text" item-value="value" :eager="true" outlined></v-select>
-                            <v-text-field label="<?= lang('App.teleponAyah') ?> *" v-model="telpayahEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-text-field label="<?= lang('App.penghasilanOrtu') ?> *" v-model="penghasilanEdit" outlined></v-text-field>
-                        </v-container>
-                    </v-card-text>
-                </v-form>
+                <v-card-text class="pt-5">
+                    <v-form ref="form" v-model="valid">
+                        <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-text-field label="<?= lang('App.namaAyah') ?> *" v-model="ayahEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-select label="<?= lang('App.pilihPekerjaan') ?> *" v-model="select_kerjaayahEdit" :items="list_pekerjaan" item-text="text" item-value="value" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-text-field label="<?= lang('App.teleponAyah') ?> *" v-model="telpayahEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-text-field label="<?= lang('App.penghasilanOrtu') ?> *" v-model="penghasilanEdit" :rules="[rules.number]" outlined></v-text-field>
+                    </v-form>
+                </v-card-text>
                 <v-divider></v-divider>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="purple" dark :loading="loading">
@@ -783,7 +614,7 @@
         modalEditIbu: false,
         modalEditAyah: false,
         data_daftar: [],
-        gelombang: "<?= $gelombang ?>",
+        gelombang: <?= $gelombang ?>,
         relasi: 1,
         list_jenismhs: [],
         list_prodi: [],
@@ -817,8 +648,8 @@
         rtEdit: "",
         rwEdit: "",
         kecamatanEdit: "",
-        select_provinsiEdit: "",
-        select_kabupatenEdit: "",
+        select_provinsiEdit: null,
+        select_kabupatenEdit: null,
         list_kabupaten: [],
         list_provinsi: [],
         kodeposEdit: "",
@@ -831,8 +662,8 @@
         rwOrtuEdit: "",
         kelurahanOrtuEdit: "",
         kecamatanOrtuEdit: "",
-        select_provinsiOrtuEdit: "",
-        select_kabupatenOrtuEdit: "",
+        select_provinsiOrtuEdit: null,
+        select_kabupatenOrtuEdit: null,
         kodeposOrtuEdit: "",
         ayahEdit: "",
         select_kerjaayahEdit: "",
@@ -1515,8 +1346,8 @@
             this.rtEdit = data.rt;
             this.rwEdit = data.rw;
             this.kecamatanEdit = data.kecamatan;
-            this.select_provinsiEdit = data.propinsi;
-            this.select_kabupatenEdit = data.kabupaten;
+            this.select_provinsiEdit = parseInt(data.propinsi);
+            this.select_kabupatenEdit = parseInt(data.kabupaten);
             this.kodeposEdit = data.kodepos;
             this.deskalamatEdit = data.deskripsi_alamat;
         },
@@ -1629,8 +1460,8 @@
             this.alamatOrtuEdit = data.ALAMATORTU;
             this.kelurahanOrtuEdit = data.KELURAHAN_ORTU;
             this.kecamatanOrtuEdit = data.KECAMATAN_ORTU;
-            this.select_provinsiOrtuEdit = data.PROPINSI_ORTU;
-            this.select_kabupatenOrtuEdit = data.KABUPATEN_ORTU;
+            this.select_provinsiOrtuEdit = parseInt(data.PROPINSI_ORTU);
+            this.select_kabupatenOrtuEdit = parseInt(data.KABUPATEN_ORTU);
             this.kodeposOrtuEdit = data.KODEPOS_ORTU;
         },
         editIbuClose: function() {
