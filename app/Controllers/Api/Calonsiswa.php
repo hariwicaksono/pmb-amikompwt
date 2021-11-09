@@ -133,7 +133,27 @@ class Calonsiswa extends BaseControllerApi
     public function update($id = NULL)
     {
         $rules = [
-            'nama_kategori' => [
+            'id_jenismhs' => [
+                'rules'  => 'required',
+                'errors' => []
+            ],
+            'status_registrasi' => [
+                'rules'  => 'required',
+                'errors' => []
+            ],
+            'pilihan1' => [
+                'rules'  => 'required',
+                'errors' => []
+            ],
+            'pilihan2' => [
+                'rules'  => 'required',
+                'errors' => []
+            ],
+            'pilihan3' => [
+                'rules'  => 'required',
+                'errors' => []
+            ],
+            'nama' => [
                 'rules'  => 'required',
                 'errors' => []
             ],
@@ -142,7 +162,15 @@ class Calonsiswa extends BaseControllerApi
         if ($this->request->getJSON()) {
             $json = $this->request->getJSON();
             $data = [
-                'nama_kategori' => $json->nama_kategori,
+                'nama' => $json->nama,
+                'kelas' => $json->kelas,
+                'pilihan1' => $json->pilihan1,
+                'pilihan2' => $json->pilihan2,
+                'pilihan3' => $json->pilihan3,
+                'no_kipk' => $json->no_kipk,
+                'status_registrasi' => $json->status_registrasi,
+                'jenis_mhs' => "4".$json->jenis_mhs,
+                'id_jenismhs' => $json->id_jenismhs,
             ];
         } else {
             $data = $this->request->getRawInput();
@@ -151,20 +179,19 @@ class Calonsiswa extends BaseControllerApi
         if (!$this->validate($rules)) {
             $response = [
                 'status' => false,
-                'message' => lang('App.reqFailed'),
+                'message' => lang('App.isRequired'),
                 'data' => $this->validator->getErrors(),
             ];
             return $this->respond($response, 200);
         } else {
-            $simpan = $this->model->update($id, $data);
-            if ($simpan) {
-                $response = [
-                    'status' => true,
-                    'message' => lang('App.productUpdated'),
-                    'data' => [],
-                ];
-                return $this->respond($response, 200);
-            }
+            //$this->model->update($id, $data);
+            $response = [
+                'status' => true,
+                'message' => lang('App.productUpdated'),
+                'data' => [],
+            ];
+            return $this->respond($response, 200);
         }
     }
+    
 }

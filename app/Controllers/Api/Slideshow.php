@@ -13,5 +13,9 @@ class Slideshow extends BaseControllerApi
         return $this->respond(["status" => true, "message" => "Success", "data" => $this->model->where(['aktif'=> 1])->findAll()], 200);
     }
 
+    public function update($id = NULL)
+    {
+
+    }
 
 }

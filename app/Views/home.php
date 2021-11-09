@@ -123,7 +123,7 @@
         ...methodsVue,
         getSlides: function() {
             this.show = true;
-            axios.get(`/api/slideshow`)
+            axios.get(`/openapi/slideshow`)
                 .then(res => {
                     // handle success
                     var data = res.data;

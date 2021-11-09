@@ -10,15 +10,15 @@
                 <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab @click="modalDaftar = true" elevation="2" title="Daftar" v-if="!data_daftar.nodaf">
                     <v-icon large>mdi-plus</v-icon>
                 </v-btn>
-                <v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab tile @click="editDaftar(data_daftar)" elevation="2" title="Edit" v-else>
+                <!--<v-btn color="yellow darken-2" class="grey--text text--darken-4" dark absolute top right fab tile @click="editDaftar(data_daftar)" elevation="2" title="Edit" v-else>
                     <v-icon>mdi-file-document-edit</v-icon>
-                </v-btn>
+                </v-btn>-->
             </v-fab-transition>
             Pendaftaran
-            <!--<v-spacer></v-spacer>
+            <v-spacer></v-spacer>
             <v-btn color="yellow darken-2" class="grey--text text--darken-3" @click="editDaftar(data_daftar)" v-show="data_daftar.nodaf">
                 <v-icon>mdi-file-document-edit</v-icon>
-            </v-btn>-->
+            </v-btn>
         </v-card-title>
         <v-card-text>
             <v-row>
@@ -296,10 +296,11 @@
                 <v-card-text class="pt-5">
                     <v-form ref="form" v-model="valid">
                         <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
-                        <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" outlined></v-select>
+                        <v-select v-model="select_daftarEdit" :items="list_jenisdaftar" item-text="text" item-value="value" label="Jenis Pendaftaran" :eager="true" :rules="[rules.required]" outlined></v-select>
                         <v-text-field label="<?= lang('App.noKipk') ?> *" v-model="nokipkEdit" :rules="[rules.number]" v-if="select_daftarEdit == 'KIP-Kuliah'" outlined></v-text-field>
-                        <v-select label="Jenis Mahasiswa" v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" :loading="loading" :eager="true" outlined></v-select>
-                        <v-select label="Program Studi" v-model="select_prodiEdit" :items="list_prodiEdit" item-text="NAMA_DEPT" item-value="KD_DEPT" chips multiple :loading="loading" :eager="true" outlined></v-select>
+                        <v-select label="Jenis Mahasiswa" v-model="select_jenismhsEdit" :items="list_jenismhsEdit" item-text="NAMA" item-value="ID_JENISMHS" :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <v-select label="Program Studi" v-model="select_prodiEdit" :items="list_prodiEdit" item-text="NAMA_DEPT" item-value="KD_DEPT" chips multiple :loading="loading" :eager="true" :rules="[rules.required]" outlined></v-select>
+                        <input type="hidden" v-model="kelasEdit">
                         <v-text-field label="<?= lang('App.nama') ?> *" v-model="namaEdit" :rules="[rules.required]" outlined>
                         </v-text-field>
                         <v-text-field label="<?= lang('App.email') ?> *" v-model="emailEdit" :rules="[rules.email]" outlined disabled>
@@ -309,7 +310,7 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="purple" dark :loading="loading">
+                    <v-btn color="purple" dark @click="updateDaftar" :loading="loading">
                         <?= lang('App.save') ?>
                     </v-btn>
                 </v-card-actions>
@@ -570,10 +571,12 @@
         },
         select_daftarEdit: function() {
             this.getJenismhsEdit();
+            //this.select_jenismhsEdit = null;
+            //this.select_prodiEdit = [];
         },
         select_jenismhsEdit: function() {
             this.getProdiEdit();
-            this.select_prodi = [];
+            //this.select_prodiEdit = [];
             if (this.select_jenismhsEdit == '4') {
                 this.kelasEdit = 'Sore';
             } else if (this.select_jenismhsEdit == '3') {
@@ -626,13 +629,14 @@
         email: "<?= session()->get('email') ?>",
         no_kipk: "",
         nodaf: "",
+        nodafEdit: '',
         list_jenismhsEdit: [],
         list_prodiEdit: [],
         namaEdit: "",
         emailEdit: "",
         nokipkEdit: "",
-        select_daftarEdit: "",
-        select_jenismhsEdit: "",
+        select_daftarEdit: null,
+        select_jenismhsEdit: null,
         select_prodiEdit: [],
         kelasEdit: "",
         nikEdit: "",
@@ -1035,10 +1039,16 @@
         },
         getDataDaftar: function() {
             this.loading = true;
-            axios.get(`/api/calonsiswa`)
+            axios.get(`/api/calonsiswa`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
+                    if (data.expired == true) {
+                        this.snackbar = true;
+                        this.snackbarType = "warning";
+                        this.snackbarMessage = data.message;
+                        setTimeout(() => window.location.href = data.data.url, 1000);
+                    }
                     if (data.status == true) {
                         this.data_daftar = data.data;
                         this.loading = false;
@@ -1059,7 +1069,7 @@
         },
         getJenismhs: function() {
             this.loading = true;
-            axios.get(`/api/jenismhs/get?daftar=${this.select_daftar}`)
+            axios.get(`/api/jenismhs/get?daftar=${this.select_daftar}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1073,7 +1083,7 @@
         },
         getJenismhsEdit: function() {
             this.loading = true;
-            axios.get(`/api/jenismhs/get?daftar=${this.select_daftarEdit}`)
+            axios.get(`/api/jenismhs/get?daftar=${this.select_daftarEdit}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1087,7 +1097,7 @@
         },
         getProdi: function() {
             this.loading = true;
-            axios.get(`/api/programstudi/get?daftar=${this.select_daftar}&jenis=${this.select_jenismhs}`)
+            axios.get(`/api/programstudi/get?daftar=${this.select_daftar}&jenis=${this.select_jenismhs}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1101,7 +1111,7 @@
         },
         getProdiEdit: function() {
             this.loading = true;
-            axios.get(`/api/programstudi/get?daftar=${this.select_daftarEdi}&jenis=${this.select_jenismhsEdit}`)
+            axios.get(`/api/programstudi/get?daftar=${this.select_daftarEdit}&jenis=${this.select_jenismhsEdit}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1116,35 +1126,30 @@
         // Save Daftar
         saveDaftar: function() {
             this.loading = true;
-            axios({
-                    method: 'post',
-                    url: '/api/calonsiswa/save',
-                    data: {
-                        nama: this.nama,
-                        email: this.email,
-                        gelombang: this.gelombang,
-                        no_kipk: this.no_kipk,
-                        pilihan1: this.select_prodi[0] ?? "",
-                        pilihan2: this.select_prodi[1] ?? "",
-                        pilihan3: this.select_prodi[2] ?? "",
-                        status_registrasi: this.select_daftar,
-                        kelas: this.kelas,
-                        id_relasi: this.relasi,
-                        jenis_mhs: this.select_jenismhs,
-                        id_jenismhs: this.select_jenismhs,
-                    },
-                    options
-                })
+            axios.post(`/api/calonsiswa/save`, {
+                    nama: this.nama,
+                    email: this.email,
+                    gelombang: this.gelombang,
+                    no_kipk: this.no_kipk,
+                    pilihan1: this.select_prodi[0] ?? "",
+                    pilihan2: this.select_prodi[1] ?? "",
+                    pilihan3: this.select_prodi[2] ?? "",
+                    status_registrasi: this.select_daftar,
+                    kelas: this.kelas,
+                    id_relasi: this.relasi,
+                    jenis_mhs: this.select_jenismhs,
+                    id_jenismhs: this.select_jenismhs,
+                }, options)
                 .then(res => {
                     // handle success
                     this.loading = false
                     var data = res.data;
-                    //if (data.expired == true) {
-                    //this.snackbar = true;
-                    //this.snackbarType = "warning";
-                    //this.snackbarMessage = data.message;
-                    //setTimeout(() => window.location.href = data.data.url, 1000);
-                    //}
+                    if (data.expired == true) {
+                        this.snackbar = true;
+                        this.snackbarType = "warning";
+                        this.snackbarMessage = data.message;
+                        setTimeout(() => window.location.href = data.data.url, 1000);
+                    }
                     if (data.status == true) {
                         this.notifType = '';
                         this.snackbar = true;
@@ -1173,7 +1178,7 @@
         editDaftar: function(data) {
             this.modalEditDaftar = true;
             this.notifType = "";
-            this.nodaf = data.nodaf;
+            this.nodafEdit = data.nodaf;
             this.select_daftarEdit = data.status_registrasi;
             this.select_jenismhsEdit = data.ID_JENISMHS;
             this.select_prodiEdit = [data.pilihan1, data.pilihan2, data.pilihan3];
@@ -1188,11 +1193,17 @@
         },
         updateDaftar: function() {
             this.loading = true;
-            axios.put(`/api/calonsiswa/update/${this.productIdEdit}`, {
-                    product_name: this.productNameEdit,
-                    product_price: this.productPriceEdit,
-                    product_description: this.productDescriptionEdit,
-                    product_image: this.mediaID
+            axios.put(`/api/calonsiswa/update/${this.nodafEdit}`, {
+                    status_registrasi: this.select_daftarEdit,
+                    id_jenismhs: this.select_jenismhsEdit,
+                    pilihan1: this.select_prodiEdit[0] ?? "",
+                    pilihan2: this.select_prodiEdit[1] ?? "",
+                    pilihan3: this.select_prodiEdit[2] ?? "",
+                    kelas: this.kelasEdit,
+                    jenis_mhs: this.select_jenismhsEdit,
+                    id_jenismhs: this.select_jenismhsEdit,
+                    no_kipk: this.nokipkEdit,
+                    nama: this.namaEdit,
                 }, options)
                 .then(res => {
                     // handle success
@@ -1208,19 +1219,19 @@
                         this.snackbar = true;
                         this.snackbarType = "success";
                         this.snackbarMessage = data.message;
-                        this.getProducts();
-                        this.modalEdit = false;
+                        this.getDataDaftar();
+                        this.modalEditDaftar = false;
                         this.$refs.form.resetValidation();
                     } else {
                         this.notifType = "error";
                         this.notifMessage = data.message;
-                        this.modalEdit = true;
+                        this.modalEditDaftar = true;
                         this.$refs.form.validate();
                     }
                 })
                 .catch(err => {
                     // handle error
-                    console.log(err.response);
+                    console.log(err);
                     this.loading = false
                 })
         },

@@ -107,6 +107,9 @@ class BaseControllerApi extends ResourceController
             && strpos($request->getHeaderLine('Content-Type'), 'multipart/form-data') === false
         ) {
             $data = $request->getRawInput();
+            foreach ($data as $key => $value) {
+                $data = (array)json_decode($key);
+            }
         } else {
             $data = $request->getVar() ?? [];
         }

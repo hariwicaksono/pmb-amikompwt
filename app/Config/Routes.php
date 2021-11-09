@@ -21,7 +21,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -42,9 +42,7 @@ $routes->group('password', function ($routes) {
 	$routes->get('change', 'Auth::passwordChange');
 });
 
-$routes->group('api', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
-	$routes->get('slideshow', 'Slideshow::index');
-    $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');
+$routes->group('api', ['filter' => 'jwtauth', 'namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
     $routes->get('tupoksi', 'Tupoksi::index');
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
     $routes->get('calonsiswa', 'Calonsiswa::index');
@@ -66,6 +64,17 @@ $routes->group('calonsiswa', ['filter' => 'auth'], function ($routes) {
     $routes->get('tupoksi', 'Tupoksi::index');
     $routes->get('tupoksi/(:segment)', 'Tupoksi::show/$1');
 });
+
+$routes->group('openapi', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
+	$routes->get('slideshow', 'Slideshow::index');
+    $routes->get('slideshow/(:segment)', 'Slideshow::show/$1');
+});
+
+$routes->group('auth', ['namespace' => $routes->getDefaultNamespace() . 'Api'], function ($routes) {
+	$routes->post('login', 'Auth::login');
+    $routes->post('register', 'Auth::register');
+});
+
 
 /*
  * --------------------------------------------------------------------

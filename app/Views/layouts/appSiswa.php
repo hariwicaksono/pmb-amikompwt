@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>App</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"> 
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
+    <link href="<?= base_url('assets/css/materialdesignicons.min.css') ?>" rel="stylesheet"> 
+    <link href="<?= base_url('assets/css/vuetify.min.css') ?>" rel="stylesheet">  
     <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
@@ -156,8 +156,8 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>-->
 
-            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:60px;" text>
-                <span class="font-weight-medium" v-if="snackbar">{{snackbarMessage}}</span>
+            <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" style="bottom:80px;" text>
+                <span v-if="snackbar">{{snackbarMessage}}</span>
                 <template v-slot:action="{ attrs }">
                     <v-btn text v-bind="attrs" @click="snackbar = false">
                         <v-icon>mdi-close</v-icon>
@@ -208,11 +208,11 @@
         </v-app>
     </div>
 
-    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vue.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuetify.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuetify-image-input.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/axios.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuejs-paginate.min.js') ?>" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.min.js" integrity="sha512-he8U4ic6kf3kustvJfiERUpojM8barHoz0WYpAUDWQVn61efpm3aVAD8RWL8OloaDDzMZ1gZiubF9OSdYBqHfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?= base_url('assets/js/main.js') ?>" type="text/javascript"></script>

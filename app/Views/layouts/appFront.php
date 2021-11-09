@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>App</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"> 
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
+    <link href="<?= base_url('assets/css/materialdesignicons.min.css') ?>" rel="stylesheet"> 
+    <link href="<?= base_url('assets/css/vuetify.min.css') ?>" rel="stylesheet">  
     <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
@@ -161,71 +161,72 @@
                 &copy; {{ new Date().getFullYear() }} — <strong>amikom</strong>
             </p>
 
-            <v-dialog v-model="modalAuth" persistent max-width="600px" min-width="600px">
-                <div>
-                    <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
-                        <v-tabs-slider color="purple darken-4"></v-tabs-slider>
-                        <v-tab v-for="(item, i) in tabs" :key="i">
-                            <v-icon large>{{ item.icon }}</v-icon>
-                            <div class="subtitle-2 py-1">{{ item.name }}</div>
-                        </v-tab>
-                        <v-tab-item>
-                            <v-card class="px-4">
-                                <v-card-text>
-                                    <v-form ref="formLogin" v-model="valid">
-                                        <v-row>
-                                            <v-col cols="12">
-                                                <v-text-field v-model="loginEmail" :rules="[rules.email]" label="E-mail"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-text-field v-model="loginPassword" :append-icon="show?'mdi-eye':'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show = !show"></v-text-field>
-                                            </v-col>
-                                            <v-col class="d-flex" cols="12" sm="6" xsm="12">
-                                            </v-col>
-                                            <v-spacer></v-spacer>
-                                            <v-col cols="12">
-                                                <v-layout>
-                                                    <a class="subtitle-2" href="<?= base_url('/password/reset') ?>"><?= lang('App.forgotPass') ?></a>
-                                                    <v-spacer></v-spacer>
-                                                    <v-btn text large class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
-                                                    <v-btn large color="purple" dark :loading="loading" @click="submitLogin">Login</v-btn>
-                                                </v-layout>
-                                            </v-col>
-                                        </v-row>
-                                    </v-form>
-                                </v-card-text>
-                            </v-card>
-                        </v-tab-item>
-                        <v-tab-item>
-                            <v-card class="px-4">
-                                <v-card-text>
-                                    <v-form ref="registerForm" v-model="valid">
-                                        <v-row>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="firstName" :rules="[rules.required]" label="First Name" maxlength="20" required></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="lastName" :rules="[rules.required]" label="Last Name" maxlength="20" required></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-text-field v-model="email" :rules="[rules.email]" label="E-mail" required></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Confirm Password" counter @click:append="show1 = !show1"></v-text-field>
-                                            </v-col>
-                                            <v-spacer></v-spacer>
-                                            <v-btn class="mb-1" large block color="purple white--text">Register</v-btn>
-                                            <v-btn text block class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
-                                        </v-row>
-                                    </v-form>
-                                </v-card-text>
-                            </v-card>
-                        </v-tab-item>
-                    </v-tabs>
-                </div>
+            <v-dialog v-model="modalAuth" persistent max-width="600px" min-width="600px" scrollable>
+                <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
+                    <v-tabs-slider color="purple darken-4"></v-tabs-slider>
+                    <v-tab v-for="(item, i) in tabs" :key="i">
+                        <v-icon large>{{ item.icon }}</v-icon>
+                        <div class="subtitle-2 py-1">{{ item.name }}</div>
+                    </v-tab>
+                    <v-tab-item>
+                        <v-card class="px-4">
+                            <v-card-text>
+                                <v-form ref="formLogin" v-model="valid">
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="loginEmail" :rules="[rules.email]" label="E-mail"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="loginPassword" :append-icon="show?'mdi-eye':'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show = !show"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-layout>
+                                                <a class="subtitle-2" href="<?= base_url('/password/reset') ?>"><?= lang('App.forgotPass') ?></a>
+                                            </v-layout>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn text class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
+                                <v-btn color="purple" large dark :loading="loading" @click="submitLogin">Login</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card class="px-4">
+                            <v-card-text>
+                                <v-form ref="registerForm" v-model="valid">
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="6" class="pb-0">
+                                            <v-text-field v-model="firstName" :rules="[rules.required]" label="First Name" maxlength="20" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="6" class="pb-0">
+                                            <v-text-field v-model="lastName" :rules="[rules.required]" label="Last Name" maxlength="20" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" class="pb-0">
+                                            <v-text-field v-model="email" :rules="[rules.email]" label="E-mail" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" class="pb-0">
+                                            <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Confirm Password" counter @click:append="show1 = !show1"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn text class="mr-2" @click="modalAuthClose"><?= lang('App.close') ?></v-btn>
+                                <v-btn large color="purple white--text"><?= lang('App.register') ?></v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs>
             </v-dialog>
 
             <v-snackbar v-model="snackbar" :color="snackbarType" :timeout="timeout" text>
@@ -239,11 +240,11 @@
         </v-app>
     </div>
 
-    <script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/vuetify-image-input" type="text/javascript"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/vuejs-paginate@latest" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vue.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuetify.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuetify-image-input.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/axios.min.js') ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vuejs-paginate.min.js') ?>" type="text/javascript"></script>
     <script src="https://unpkg.com/animejs@2.2.0/anime.min.js" type="text/javascript"></script>
     <script src="<?= base_url('assets/js/main.js') ?>" type="text/javascript"></script>
 
@@ -381,14 +382,14 @@
             loginEmail: "",
             loginPassword: "",
             rules: {
-                email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid');?>',
-                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength');?> ${len}`,
+                email: v => !!(v || '').match(/@/) || '<?= lang('App.emailValid'); ?>',
+                length: len => v => (v || '').length <= len || `<?= lang('App.invalidLength'); ?> ${len}`,
                 password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
-                    '<?= lang('App.strongPassword');?>',
-                min: v => v.length >= 8 || '<?= lang('App.minChar');?>',
-                required: v => !!v || '<?= lang('App.isRequired');?>',
-                number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber');?>",
-                zero:  v => v > 0 || "<?= lang('App.isZero');?>"
+                    '<?= lang('App.strongPassword'); ?>',
+                min: v => v.length >= 8 || '<?= lang('App.minChar'); ?>',
+                required: v => !!v || '<?= lang('App.isRequired'); ?>',
+                number: v => Number.isInteger(Number(v)) || "<?= lang('App.isNumber'); ?>",
+                zero: v => v > 0 || "<?= lang('App.isZero'); ?>"
             },
         }
         var methodsVue = {
@@ -407,16 +408,9 @@
             },
             submitLogin() {
                 this.loading = true;
-                axios({
-                        method: 'post',
-                        url: '/api/auth/login',
-                        data: {
-                            email: this.loginEmail,
-                            password: this.loginPassword,
-                        },
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
+                axios.post('/openapi/auth/login', {
+                        email: this.loginEmail,
+                        password: this.loginPassword,
                     })
                     .then(res => {
                         // handle success
