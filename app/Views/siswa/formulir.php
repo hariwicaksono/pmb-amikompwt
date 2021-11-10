@@ -109,15 +109,7 @@
         <v-card-text>
             <v-row>
                 <v-col>
-                    <h4>Desa/Kelurahan:</h4>{{ data_daftar.kelurahan??"—"}}
-                </v-col>
-                <v-col>
-                    <h4>RT / RW:</h4>{{ data_daftar.rt??"—"}} / {{ data_daftar.rw??"—"}}
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <h4>Kecamatan:</h4>{{ data_daftar.kecamatan??"—"}}
+                    <h4>Provinsi:</h4>{{ data_daftar.propinsi??"—"}}
                 </v-col>
                 <v-col>
                     <h4>Kabupaten:</h4>{{ data_daftar.kabupaten??"—"}}
@@ -125,10 +117,18 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <h4>Provinsi:</h4>{{ data_daftar.propinsi??"—"}}
+                    <h4>Kecamatan:</h4>{{ data_daftar.kecamatan??"—"}}
                 </v-col>
                 <v-col>
                     <h4>Kode Pos:</h4>{{ data_daftar.kodepos??"—"}}
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <h4>Desa/Kelurahan:</h4>{{ data_daftar.kelurahan??"—"}}
+                </v-col>
+                <v-col>
+                    <h4>RT / RW:</h4>{{ data_daftar.rt??"—"}} / {{ data_daftar.rw??"—"}}
                 </v-col>
             </v-row>
             <v-row>
@@ -385,6 +385,10 @@
                 <v-card-text class="pt-5">
                     <v-form ref="form" v-model="valid">
                         <v-alert v-if="notifType != ''" dismissible dense outlined :type="notifType">{{notifMessage}}</v-alert>
+                        <v-select label="<?= lang('App.pilihProvinsi') ?> *" v-model="select_provinsiEdit" :items="list_provinsi" item-text="provinsi" item-value="id_provinsi" :eager="true" outlined></v-select>
+                        <v-select label="<?= lang('App.pilihKabupaten') ?> *" v-model="select_kabupatenEdit" :items="list_kabupaten" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" outlined></v-select>
+                        <v-text-field label="<?= lang('App.kecamatan') ?> *" v-model="kecamatanEdit" :rules="[rules.required]" outlined></v-text-field>
+                        <v-text-field label="<?= lang('App.kelurahan') ?> *" v-model="kelurahanEdit" :rules="[rules.required]" outlined></v-text-field>
                         <v-textarea label="<?= lang('App.alamat') ?> *" v-model="alamatEdit" :rules="[rules.required]" :rules="[rules.length(220)]" counter outlined></v-textarea>
                         <v-row>
                             <v-col>
@@ -394,10 +398,6 @@
                                 <v-text-field label="<?= lang('App.rw') ?> *" v-model="rwEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
                             </v-col>
                         </v-row>
-                        <v-text-field label="<?= lang('App.kelurahan') ?> *" v-model="kelurahanEdit" :rules="[rules.required]" outlined></v-text-field>
-                        <v-text-field label="<?= lang('App.kecamatan') ?> *" v-model="kecamatanEdit" :rules="[rules.required]" outlined></v-text-field>
-                        <v-select label="<?= lang('App.pilihProvinsi') ?> *" v-model="select_provinsiEdit" :items="list_provinsi" item-text="provinsi" item-value="id_provinsi" :eager="true" outlined></v-select>
-                        <v-select label="<?= lang('App.pilihKabupaten') ?> *" v-model="select_kabupatenEdit" :items="list_kabupaten" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" outlined></v-select>
                         <v-text-field label="<?= lang('App.kodepos') ?> *" v-model="kodeposEdit" :rules="[rules.number, rules.required]" outlined></v-text-field>
                         <v-textarea label="<?= lang('App.deskripsiAlamat') ?> *" v-model="deskalamatEdit" :rules="[rules.length(220)]" counter outlined></v-textarea>
                     </v-form>
@@ -470,6 +470,10 @@
                         <label>Alamat Orang Tua</label>
                         <v-checkbox v-model="checkAlamat" label="Samakan Alamat Orang Tua dengan Alamat Siswa"></v-checkbox>
                         <template v-if="checkAlamat == false">
+                            <v-select label="<?= lang('App.pilihProvinsiOrtu') ?> *" v-model="select_provinsiOrtuEdit" :items="list_provinsiOrtu" item-text="provinsi" item-value="id_provinsi" :eager="true" :rules="[rules.required]" outlined></v-select>
+                            <v-select label="<?= lang('App.pilihKabupatenOrtu') ?> *" v-model="select_kabupatenOrtuEdit" :items="list_kabupatenOrtu" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" :rules="[rules.required]" outlined></v-select>
+                            <v-text-field label="<?= lang('App.kecamatanOrtu') ?> *" v-model="kecamatanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
+                            <v-text-field label="<?= lang('App.kelurahanOrtu') ?> *" v-model="kelurahanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
                             <v-textarea label="<?= lang('App.alamatOrtu') ?> *" v-model="alamatOrtuEdit" :rules="[rules.required]" :rules="[rules.length(220)]" counter outlined></v-textarea>
                             <v-row>
                                 <v-col>
@@ -479,10 +483,6 @@
                                     <v-text-field label="<?= lang('App.rwOrtu') ?> *" v-model="rwOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
                                 </v-col>
                             </v-row>
-                            <v-text-field label="<?= lang('App.kelurahanOrtu') ?> *" v-model="kelurahanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-text-field label="<?= lang('App.kecamatanOrtu') ?> *" v-model="kecamatanOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
-                            <v-select label="<?= lang('App.pilihProvinsiOrtu') ?> *" v-model="select_provinsiOrtuEdit" :items="list_provinsiOrtu" item-text="provinsi" item-value="id_provinsi" :eager="true" :rules="[rules.required]" outlined></v-select>
-                            <v-select label="<?= lang('App.pilihKabupatenOrtu') ?> *" v-model="select_kabupatenOrtuEdit" :items="list_kabupatenOrtu" item-text="nama_kabupaten" item-value="id_kabupaten" :eager="true" :rules="[rules.required]" outlined></v-select>
                             <v-text-field label="<?= lang('App.kodeposOrtu') ?> *" v-model="kodeposOrtuEdit" :rules="[rules.required]" outlined></v-text-field>
                         </template>
                     </v-form>
@@ -594,10 +594,14 @@
             }
         },
         select_provinsiEdit: function() {
-            this.getKabupaten();
+            if (!isNaN(this.select_provinsiEdit)) {
+                this.getKabupaten();
+            }
         },
         select_provinsiOrtuEdit: function() {
-            this.getKabupatenOrtu();
+            if (!isNaN(this.select_provinsiOrtuEdit)) {
+                this.getKabupatenOrtu();
+            }
         },
     }
     const token = JSON.parse(localStorage.getItem('access_token'));
@@ -1292,7 +1296,7 @@
         },
         getProvinsi: function() {
             this.loading = true;
-            axios.get(`/api/provinsi`)
+            axios.get(`/api/provinsi`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1306,7 +1310,7 @@
         },
         getProvinsiOrtu: function() {
             this.loading = true;
-            axios.get(`/api/provinsi`)
+            axios.get(`/api/provinsi`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1320,7 +1324,7 @@
         },
         getKabupaten: function() {
             this.loading = true;
-            axios.get(`/api/kabupaten/get?provinsi=${this.select_provinsiEdit}`)
+            axios.get(`/api/kabupaten/get?provinsi=${this.select_provinsiEdit}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;
@@ -1334,7 +1338,7 @@
         },
         getKabupatenOrtu: function() {
             this.loading = true;
-            axios.get(`/api/kabupaten/get?provinsi=${this.select_provinsiOrtuEdit}`)
+            axios.get(`/api/kabupaten/get?provinsi=${this.select_provinsiOrtuEdit}`, options)
                 .then(res => {
                     // handle success
                     var data = res.data;

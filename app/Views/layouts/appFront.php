@@ -408,7 +408,7 @@
             },
             submitLogin() {
                 this.loading = true;
-                axios.post('/openapi/auth/login', {
+                axios.post('/auth/login', {
                         email: this.loginEmail,
                         password: this.loginPassword,
                     })
