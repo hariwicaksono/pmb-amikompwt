@@ -842,9 +842,6 @@
             text: 'PELAYARAN DAN KEMARITIMAN',
             value: 'PELAYARAN'
         }, {
-            text: 'KEHUTANAN',
-            value: 'KEHUTANAN'
-        }, {
             text: 'PARIWISATA',
             value: 'PARIWISATA'
         }, {
